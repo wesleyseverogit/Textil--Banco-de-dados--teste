@@ -4,865 +4,697 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TextilSul Distribuidora - Portal de Candidatos</title>
+    <!-- Tailwind CSS para estilização moderna e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Estilos personalizados para melhorar a experiência visual */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
         }
-        .modal {
-            transition: opacity 0.25s ease;
+        .tab-active {
+            border-bottom-color: #2563eb;
+            color: #2563eb;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-850 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col">
 
-    <!-- Navbar -->
-    <nav class="bg-blue-900 text-white shadow-md">
+    <!-- Navegação Superior -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <span class="bg-white text-blue-900 font-bold px-3 py-1 rounded-md text-xl shadow-inner">TS</span>
-                    <span class="font-semibold text-lg tracking-wide hidden sm:inline">TextilSul Distribuidora</span>
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-blue-600 tracking-wide">TS TextilSul Distribuidora</span>
                 </div>
-                <div class="flex space-x-2 text-sm sm:text-base">
-                    <a href="#vagas" class="hover:bg-blue-800 px-3 py-2 rounded-md transition">Vagas Disponíveis</a>
-                    <a href="#sobre" class="hover:bg-blue-800 px-3 py-2 rounded-md transition">Quem Somos</a>
-                    <a href="#rastreio" class="hover:bg-blue-800 px-3 py-2 rounded-md transition">Acompanhar Inscrição</a>
-                    <button onclick="abrirAutenticacao()" class="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md font-medium transition flex items-center gap-1">
-                        📊 Datacenter RH
-                    </button>
+                <div class="flex space-x-2 sm:space-x-4 items-center">
+                    <button onclick="switchTab('vagas')" id="btn-tab-vagas" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600 transition tab-active">Vagas Disponíveis</button>
+                    <button onclick="switchTab('status')" id="btn-tab-status" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600 transition">Acompanhar Inscrição</button>
+                    <button onclick="switchTab('admin')" id="btn-tab-admin" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600 transition flex items-center gap-1">📊 Datacenter RH</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="bg-gradient-to-r river from-blue-800 to-indigo-900 text-white py-16 px-4 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Trabalhe na TextilSul Distribuidora</h1>
-            <p class="text-lg text-blue-100 max-w-2xl mx-auto mb-8">
-                Somos uma empresa de comércio de vestuário focada no mercado B2B, especializada na distribuição de artigos de vestuário em larga escala para lojistas e grandes redes de varejo. Venha crescer com a gente!
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#vagas" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg shadow transition">Ver Oportunidades</a>
-                <a href="#rastreio" class="bg-transparent border border-white hover:bg-white/10 text-white font-semibold px-6 py-3 rounded-lg transition">Rastrear Candidatura Existente</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-16">
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Sobre a Empresa -->
-        <section id="sobre" class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Sobre a Empresa</h2>
-            <p class="text-gray-600 leading-relaxed">
-                A <strong>TextilSul Distribuidora</strong> é uma empresa de comércio de vestuário focada no mercado B2B, especializada na distribuição de artigos de vestuário em larga escala para lojistas e grandes redes de varejo. Nosso compromisso é entregar excelência operacional e produtos de alta qualidade para impulsionar o comércio varejista regional.
-            </p>
-        </section>
+        <!-- SEÇÃO: VAGAS DISPONÍVEIS -->
+        <section id="section-vagas" class="space-y-8">
+            <div class="bg-gradient-to-r align-middle from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-10 text-white shadow-lg">
+                <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">Trabalhe na TextilSul Distribuidora</h1>
+                <p class="text-blue-100 max-w-2xl text-sm sm:text-base">Somos uma empresa de comércio de vestuário focada no mercado B2B, especializada na distribuição de artigos de vestuário em larga escala para lojistas e grandes redes de varejo. Venha crescer com a gente!</p>
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <button onclick="scrollToElement('lista-vagas')" class="bg-white text-blue-700 px-5 py-2.5 rounded-xl font-semibold shadow hover:bg-blue-50 transition text-sm">Ver Oportunidades</button>
+                    <button onclick="switchTab('status')" class="bg-blue-500 bg-opacity-40 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-opacity-50 transition text-sm">Rastrear Candidatura Existente</button>
+                </div>
+            </div>
 
-        <!-- Vagas Disponíveis -->
-        <section id="vagas" class="space-y-6">
-            <h2 class="text-2xl font-bold text-gray-900 border-b pb-2">Vagas Disponíveis</h2>
-            <p class="text-gray-600 text-sm -mt-4">Selecione seu perfil profissional e inicie seu processo seletivo</p>
-            
-            <div class="grid md:grid-cols-2 gap-6">
+            <div id="lista-vagas" class="grid md:grid-cols-2 gap-6 pt-4">
                 <!-- Vaga 1 -->
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between hover:shadow-md transition">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-3">
-                                <span class="text-3xl bg-amber-50 p-2 rounded-lg">🛒</span>
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-900">Vendedor(a)</h3>
-                                    <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-0.5 rounded">CLT</span>
-                                </div>
-                            </div>
+                            <span class="p-3 bg-blue-50 rounded-lg text-2xl text-blue-600">🛒</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-full">CLT</span>
                         </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Vendedor(a)</h3>
                         <ul class="space-y-2 text-sm text-gray-600 mb-6">
-                            <li><strong>📍 Localização:</strong> Porto Alegre - RS</li>
-                            <li><strong>🎓 Formação:</strong> Ensino médio completo</li>
-                            <li><strong>⏰ Horário:</strong> 8h - 15h</li>
-                            <li><strong>💰 Salário:</strong> R$ 2000 + Comissões</li>
-                            <li><strong>🎁 Benefícios:</strong> Vale Alimentação, Plano de saúde</li>
-                            <li><strong>💡 Requisitos:</strong> Boa comunicação</li>
+                            <li class="flex items-center gap-2"><strong>📍 Localização:</strong> Porto Alegre - RS</li>
+                            <li class="flex items-center gap-2"><strong>🎓 Formação:</strong> Ensino médio completo</li>
+                            <li class="flex items-center gap-2"><strong>⏰ Horário:</strong> 8h - 15h</li>
+                            <li class="flex items-center gap-2"><strong>💰 Salário:</strong> R$ 2000 + Comissões</li>
+                            <li class="flex items-center gap-2"><strong>🎁 Benefícios:</strong> Vale Alimentação, Plano de saúde</li>
+                            <li class="flex items-center gap-2"><strong>💡 Requisitos:</strong> Boa comunicação</li>
                         </ul>
                     </div>
-                    <button onclick="abrirInscricao('Vendedor(a)')" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-2.5 rounded-lg transition">
-                        Enviar Currículo para Vendas
-                    </button>
+                    <button onclick="openApplyModal('Vendedor(a)')" class="w-full bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-gray-800 transition text-sm mt-auto">Enviar Currículo para Vendas</button>
                 </div>
 
                 <!-- Vaga 2 -->
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between hover:shadow-md transition">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-3">
-                                <span class="text-3xl bg-purple-50 p-2 rounded-lg">💻</span>
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-900">DEV Back-End</h3>
-                                    <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-0.5 rounded">CLT</span>
+                            <span class="p-3 bg-indigo-50 rounded-lg text-2xl text-indigo-600">💻</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-full">CLT</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">DEV Back-End</h3>
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li class="flex items-center gap-2"><strong>📍 Localização:</strong> Porto Alegre - RS</li>
+                            <li class="flex items-center gap-2"><strong>🎓 Formação:</strong> Análise e Desenvolvimento de Sistemas</li>
+                            <li class="flex items-center gap-2"><strong>⏰ Horário:</strong> 8h - 15h</li>
+                            <li class="flex items-center gap-2"><strong>💰 Salário:</strong> R$ 3500</li>
+                            <li class="flex items-center gap-2"><strong>🎁 Benefícios:</strong> Vale Alimentação, Plano de saúde</li>
+                        </ul>
+                    </div>
+                    <button onclick="openApplyModal('DEV Back-End')" class="w-full bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-gray-800 transition text-sm mt-auto">Enviar Currículo para Dev</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: RASTREAMENTO DE STATUS -->
+        <section id="section-status" class="hidden max-w-2xl mx-auto space-y-6">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Acompanhe seu Status</h2>
+                <p class="text-sm text-gray-500 mb-6">Digite o código gerado no final da sua inscrição ou o e-mail cadastrado para verificar as etapas atuais da sua triagem pelo time de Atração da TextilSul.</p>
+                
+                <div class="mb-4 bg-blue-50 text-blue-800 p-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
+                    <span><strong>Código de teste rápido:</strong> Consulte o fluxo usando o exemplo TS-5541</span>
+                    <button onclick="fillSearchExample()" class="underline font-semibold hover:text-blue-900">Usar Exemplo</button>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="text" id="input-busca-tracking" placeholder="Ex: TS-5541 ou candidato@email.com" class="flex-grow px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
+                    <button onclick="buscarTracking()" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-blue-700 transition">Buscar</button>
+                </div>
+            </div>
+
+            <!-- Card de Progresso (Injetado dinamicamente) -->
+            <div id="container-resultado-tracking" class="hidden"></div>
+        </section>
+
+        <!-- SEÇÃO: DATACENTER (ADMIN RH) -->
+        <section id="section-admin" class="hidden space-y-6">
+            <!-- Bloqueio de Segurança Simulador -->
+            <div id="admin-auth-panel" class="max-w-md mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center space-y-4">
+                <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto text-xl">🔐</div>
+                <h3 class="text-lg font-bold text-gray-900">Acesso Restrito ao Datacenter</h3>
+                <p class="text-xs text-gray-500">Este terminal exige autenticação para visualizar dados corporativos e candidaturas.</p>
+                <div>
+                    <input type="password" id="admin-password" placeholder="Senha Corporativa" class="w-full text-center px-4 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                    <p id="auth-error-msg" class="text-red-500 text-xs mt-1 hidden">Acesso Negado: Senha inválida!</p>
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button onclick="switchTab('vagas')" class="w-1/2 bg-gray-100 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition">Cancelar</button>
+                    <button onclick="autenticarAdmin()" class="w-1/2 bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Autenticar</button>
+                </div>
+            </div>
+
+            <!-- Painel Gerencial Pós-Autenticação -->
+            <div id="admin-dashboard-panel" class="hidden space-y-6">
+                <div class="bg-gray-900 rounded-xl p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold">Datacenter de Inscrições (Firebase Cloud)</h2>
+                        <p class="text-xs text-gray-400">Sincronização global de candidaturas in-memory</p>
+                    </div>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <button onclick="limparBancoDeDados()" class="w-1/2 sm:w-auto bg-red-600 bg-opacity-80 hover:bg-opacity-100 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">Limpar Banco de Dados</button>
+                        <button onclick="resetarParaPadrao()" class="w-1/2 sm:w-auto bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">Resetar para Padrão</button>
+                    </div>
+                </div>
+
+                <!-- Métricas Rápidas -->
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                        <span class="block text-2xl font-bold text-blue-600" id="metric-total">0</span>
+                        <span class="text-xs text-gray-500 font-medium">Total de Documentos</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                        <span class="block text-2xl font-bold text-gray-800" id="metric-vendas">0</span>
+                        <span class="text-xs text-gray-500 font-medium">Vaga: Vendedor(a)</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
+                        <span class="block text-2xl font-bold text-gray-800" id="metric-dev">0</span>
+                        <span class="text-xs text-gray-500 font-medium">Vaga: DEV Back-End</span>
+                    </div>
+                </div>
+
+                <!-- Tabela de Documentos -->
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-100">
+                        <h3 class="font-bold text-gray-900 text-sm">Tabela: candidaturas_collection</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 text-xs uppercase tracking-wider font-semibold border-b border-gray-200">
+                                    <th class="px-6 py-3">ID Primário</th>
+                                    <th class="px-6 py-3">Candidato</th>
+                                    <th class="px-6 py-3">Vaga</th>
+                                    <th class="px-6 py-3">Currículo Anexo</th>
+                                    <th class="px-6 py-3">Etapa Atual (Alterar)</th>
+                                    <th class="px-6 py-3 text-center">Ações RH</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body" class="divide-y divide-gray-100">
+                                <!-- Injetado dinamicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Painel Inferior de Logs / Visualizadores -->
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Esquerda: Visualização JSON bruta para Devs -->
+                    <div class="bg-gray-900 rounded-xl p-4 shadow-inner text-green-400 font-mono text-xs overflow-y-auto max-h-80">
+                        <span class="text-gray-500 block mb-2 border-b border-gray-800 pb-1">// Visualização JSON do Payload Cloud Live</span>
+                        <pre id="admin-json-viewer" class="whitespace-pre-wrap">{}</pre>
+                    </div>
+
+                    <!-- Direita: Visualizador do arquivo PDF/Docx decodificado -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex flex-col justify-between" id="admin-document-viewer">
+                        <div>
+                            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                                <h4 class="font-bold text-gray-900 text-sm">Visualizador de Documentos RH</h4>
+                                <span class="text-xs text-gray-400 font-mono" id="view-system-id">ID do Sistema: TS-0000</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <h3 class="text-lg font-bold text-gray-800" id="view-candidate-name">Nome do Candidato</h3>
+                                <p class="text-sm text-blue-600 font-medium" id="view-candidate-job">Vaga Pretendida</p>
+                                <div class="text-xs text-gray-500 space-y-1 pt-2">
+                                    <p><strong>📧 E-mail:</strong> <span id="view-candidate-email">--</span></p>
+                                    <p><strong>📞 Telefone:</strong> <span id="view-candidate-phone">--</span></p>
+                                    <p><strong>🔗 Portfólio/LinkedIn:</strong> <span id="view-candidate-portfolio">--</span></p>
+                                </div>
+                            </div>
+                            <div class="border rounded-lg p-3 bg-gray-50 flex items-center justify-between gap-3 text-xs mb-4">
+                                <div class="flex items-center gap-2 overflow-hidden">
+                                    <span class="text-xl text-red-500">📄</span>
+                                    <div class="truncate">
+                                        <p class="font-semibold text-gray-700 truncate" id="view-file-name">nome_do_arquivo.pdf</p>
+                                        <p class="text-gray-400 font-mono text-[10px]" id="view-file-type">Payload binário codificado em Base64</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
-                            <li><strong>📍 Localização:</strong> Porto Alegre - RS</li>
-                            <li><strong>🎓 Formação:</strong> Análise e Desenvolvimento de Sistemas</li>
-                            <li><strong>⏰ Horário:</strong> 8h - 15h</li>
-                            <li><strong>💰 Salário:</strong> R$ 3500</li>
-                            <li><strong>🎁 Benefícios:</strong> Vale Alimentação, Plano de saúde</li>
-                        </ul>
+                        <div class="flex gap-2">
+                            <button id="btn-download-resume" disabled class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-1">
+                                📥 Baixar Arquivo
+                            </button>
+                            <button onclick="fecharSessaoDocumento()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs py-2 rounded-lg transition">
+                                🔒 Fechar e Bloquear Sessão
+                            </button>
+                        </div>
                     </div>
-                    <button onclick="abrirInscricao('DEV Back-End')" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-2.5 rounded-lg transition">
-                        Enviar Currículo para Dev
-                    </button>
                 </div>
+
             </div>
         </section>
 
-        <!-- Acompanhar Inscrição -->
-        <section id="rastreio" class="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold text-gray-900 text-center mb-2">Acompanhe seu Status</h2>
-            <p class="text-gray-500 text-sm text-center mb-6">Digite o código gerado no final da sua inscrição ou o e-mail cadastrado para verificar as etapas atuais da sua triagem pelo time de Atração da TextilSul.</p>
-            
-            <div class="bg-blue-50 border border-blue-200 text-blue-800 rounded-lg p-3 text-xs mb-4 text-center">
-                <strong>Código de teste rápido:</strong> Consulte o fluxo usando o exemplo <span class="font-bold underline cursor-pointer" onclick="preencherExemplo()">TS-5541</span>
-            </div>
-
-            <div class="flex gap-2 mb-6">
-                <input type="text" id="inputRastreio" placeholder="Código da Inscrição ou E-mail" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
-                <button onclick="buscarInscricao()" class="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-lg transition">Buscar</button>
-            </div>
-
-            <!-- Resultado Rastreio -->
-            <div id="resultadoRastreio" class="hidden border rounded-xl p-4 bg-gray-50">
-                <div class="flex justify-between items-center mb-4 border-b pb-2">
-                    <div>
-                        <h4 class="font-bold text-gray-900" id="rastreioVaga">Vendedor(a)</h4>
-                        <p class="text-xs text-gray-500" id="rastreioCandidato">Candidato: Mariana Santos | ID: TS-5541</p>
-                    </div>
-                    <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded" id="rastreioStatusBadge">Em Andamento</span>
-                </div>
-                
-                <div class="space-y-4 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-200">
-                    <!-- Step 1 -->
-                    <div class="flex gap-3 items-start relative">
-                        <span id="step1Icon" class="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10">✓</span>
-                        <div>
-                            <h5 class="text-sm font-semibold text-gray-900" id="step1Title">Inscrição Efetuada</h5>
-                            <p class="text-xs text-gray-500" id="step1Status">Concluído</p>
-                        </div>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="flex gap-3 items-start relative">
-                        <span id="step2Icon" class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold z-10">!</span>
-                        <div>
-                            <h5 class="text-sm font-semibold text-gray-900" id="step2Title">Análise de Requisitos e Currículo</h5>
-                            <p class="text-xs text-gray-500" id="step2Status">Em Andamento</p>
-                        </div>
-                    </div>
-                    <!-- Step 3 -->
-                    <div class="flex gap-3 items-start relative">
-                        <span id="step3Icon" class="w-6 h-6 rounded-full bg-gray-200 text-gray-600 text-xs flex items-center justify-center font-bold z-10">3</span>
-                        <div>
-                            <h5 class="text-sm font-semibold text-gray-400" id="step3Title">Entrevista com Gestor Comercial / TI</h5>
-                            <p class="text-xs text-gray-400" id="step3Status">Pendente</p>
-                        </div>
-                    </div>
-                    <!-- Step 4 -->
-                    <div class="flex gap-3 items-start relative">
-                        <span id="step4Icon" class="w-6 h-6 rounded-full bg-gray-200 text-gray-600 text-xs flex items-center justify-center font-bold z-10">4</span>
-                        <div>
-                            <h5 class="text-sm font-semibold text-gray-400" id="step4Title">Formalização de Proposta CLT</h5>
-                            <p class="text-xs text-gray-400" id="step4Status">Pendente</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="erroRastreio" class="hidden text-center text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">
-                Nenhum registro encontrado para este termo. Certifique-se do código gerado (ex: TS-XXXX) ou do e-mail.
-            </div>
-        </section>
-
-        <!-- Seção do Datacenter Protegida -->
-        <section id="datacenter" class="hidden bg-white rounded-xl p-6 sm:p-8 shadow-md border-2 border-blue-900 space-y-8">
-            <div class="flex flex-wrap justify-between items-center border-b pb-4 gap-4">
-                <div>
-                    <span class="bg-blue-100 text-blue-900 font-bold px-2 py-0.5 rounded text-xs" id="dbStatusLabel">Servidor Cloud Híbrido</span>
-                    <h2 class="text-2xl font-bold text-gray-900">Datacenter de Inscrições (Firebase Cloud)</h2>
-                    <p class="text-sm text-gray-500">Sincronização global de candidaturas em tempo real via nuvem</p>
-                </div>
-                <div class="flex gap-2">
-                    <button onclick="limparBanco()" class="border border-red-300 hover:bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition">Limpar Banco de Dados</button>
-                    <button onclick="resetarBanco()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition">Resetar para Padrão</button>
-                </div>
-            </div>
-
-            <!-- Contadores -->
-            <div class="grid grid-cols-3 gap-4 text-center">
-                <div class="bg-gray-50 p-4 rounded-xl border">
-                    <p class="text-xs text-gray-500 uppercase font-semibold">Total de Documentos</p>
-                    <p class="text-2xl font-bold text-blue-900" id="totalDocs">0</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-xl border">
-                    <p class="text-xs text-gray-500 uppercase font-semibold">Vaga: Vendedor(a)</p>
-                    <p class="text-2xl font-bold text-amber-600" id="totalVendas">0</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-xl border">
-                    <p class="text-xs text-gray-500 uppercase font-semibold">Vaga: DEV Back-End</p>
-                    <p class="text-2xl font-bold text-purple-600" id="totalDev">0</p>
-                </div>
-            </div>
-
-            <!-- Tabela de Candidaturas -->
-            <div class="overflow-x-auto">
-                <h3 class="text-lg font-bold text-gray-900 mb-3">Tabela: candidaturas_collection</h3>
-                <table class="w-full text-left border-collapse text-sm">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-700 uppercase text-xs border-b">
-                            <th class="p-3">ID Primário</th>
-                            <th class="p-3">Candidato</th>
-                            <th class="p-3">Vaga</th>
-                            <th class="p-3">Currículo Anexo</th>
-                            <th class="p-3">Etapa Atual (Alterar)</th>
-                            <th class="p-3 text-center">Ações RH</th>
-                        </tr>
-                    </thead>
-                    <tbody id="corpoTabela">
-                        <!-- Gerado dinamicamente -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Grid de Detalhes Técnicos -->
-            <div class="grid md:grid-cols-2 gap-6 pt-4">
-                <!-- Visualização JSON -->
-                <div class="bg-gray-900 text-emerald-400 p-4 rounded-xl font-mono text-xs overflow-auto h-64 shadow-inner">
-                    <div class="text-gray-400 border-b border-gray-700 pb-2 mb-2 font-sans font-bold flex justify-between">
-                        <span>Visualização JSON do Payload</span>
-                        <span class="text-emerald-500" id="liveIndicator">Cloud Live</span>
-                    </div>
-                    <pre id="jsonPayload">{}</pre>
-                </div>
-
-                <!-- Visualizador de Documentos -->
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col justify-between h-64">
-                    <div>
-                        <div class="flex justify-between items-center text-xs text-gray-400 mb-2 border-b pb-1">
-                            <span>Visualizador de Documentos RH</span>
-                            <span id="docSystemId">ID do Sistema: TS-0000</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-lg" id="docNome">Nome do Candidato</h4>
-                        <p class="text-sm font-medium text-blue-800 mb-3" id="docVaga">Vaga Pretendida</p>
-                        <div class="text-xs text-gray-600 space-y-1">
-                            <p><strong>📧 E-mail:</strong> <span id="docEmail">--</span></p>
-                            <p><strong>📞 Telefone:</strong> <span id="docTelefone">--</span></p>
-                            <p><strong>🔗 Portfólio/LinkedIn:</strong> <span id="docLink">--</span></p>
-                        </div>
-                    </div>
-                    <div class="bg-white border p-2 rounded-lg flex items-center justify-between mt-2">
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">📄</span>
-                            <div>
-                                <p class="text-xs font-medium text-gray-800 truncate w-40" id="docFile">nome_do_arquivo.pdf</p>
-                                <p class="text-[10px] text-gray-400">Payload binário codificado em Base64</p>
-                            </div>
-                        </div>
-                        <button onclick="baixarFakePeloVisualizador()" class="bg-blue-900 hover:bg-blue-800 text-white font-bold px-3 py-1 rounded text-xs transition">📥 Baixar Arquivo</button>
-                    </div>
-                </div>
-            </div>
-            <div class="text-right">
-                <button onclick="bloquearDatacenter()" class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">🔒 Fechar e Bloquear Sessão</button>
-            </div>
-        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm mt-12 border-t border-gray-800">
-        <p>TextilSul Distribuidora B2B © 2026. Processos Seletivos e Gestão de Talentos.</p>
-        <div class="flex justify-center space-x-4 mt-2 text-xs">
-            <a href="#" class="hover:text-white transition">Portal de Privacidade</a>
-            <span>•</span>
-            <a href="#" class="hover:text-white transition">Contato RH</a>
-        </div>
+    <!-- Rodapé Corporativo -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-xs text-gray-500 space-y-2">
+        <p>TextilSul Distribuidora B2B &copy; 2026. Processos Seletivos e Gestão de Talentos.</p>
+        <p class="space-x-4">
+            <a href="#" class="hover:underline">Portal de Privacidade</a>
+            <span>&bull;</span>
+            <a href="#" class="hover:underline">Contato RH</a>
+        </p>
     </footer>
 
-    <!-- MODAL 1: AUTENTICAÇÃO DO DATACENTER -->
-    <div id="modalAuth" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none modal">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md border-t-4 border-blue-900 mx-4">
-            <div class="text-center mb-6">
-                <span class="text-4xl">🔐</span>
-                <h3 class="text-xl font-bold text-gray-900 mt-2">Acesso Restrito ao Datacenter</h3>
-                <p class="text-xs text-gray-500 mt-1">Este terminal exige autenticação para visualizar dados corporativos e candidaturas.</p>
+    <!-- MODAL DE INSCRIÇÃO (CANDIDATURA) -->
+    <div id="apply-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4 relative animate-in fade-in zoom-in-95 duration-150">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 block mb-1">Porto Alegre - RS</span>
+                <h3 class="text-xl font-bold text-gray-900" id="modal-job-title">Candidatura à Vaga</h3>
             </div>
-            <div class="space-y-4">
+            
+            <!-- Ajustado: Removido onsubmit para evitar interceptação ou travamento do navegador -->
+            <form id="apply-form" class="space-y-3.5">
+                <input type="hidden" id="form-job-title">
+                
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Senha Corporativa</label>
-                    <input type="password" id="senhaInput" placeholder="Digite a credencial de segurança" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nome Completo *</label>
+                    <input type="text" id="form-name" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <div id="erroAuth" class="hidden text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg p-2 text-center font-medium">
-                    Acesso Negado: Senha inválida!
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">E-mail *</label>
+                        <input type="email" id="form-email" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Telefone *</label>
+                        <input type="tel" id="form-phone" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
                 </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">LinkedIn ou Portfólio</label>
+                    <input type="url" id="form-portfolio" placeholder="https://" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Anexar Currículo *</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:bg-gray-50 transition relative" id="drop-zone">
+                        <input type="file" id="form-resume" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleFileSelected(this)">
+                        <div class="space-y-1 text-gray-500" id="upload-prompt">
+                            <span class="block text-2xl">📁</span>
+                            <p class="text-xs font-medium">Clique para selecionar seu arquivo PDF ou DOCX</p>
+                        </div>
+                        <div class="hidden flex items-center justify-center gap-2 text-xs font-bold text-green-600" id="upload-success">
+                            <span>✅</span> <span id="uploaded-file-name">arquivo.pdf</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flex gap-2 pt-2">
-                    <button onclick="fecharModal('modalAuth')" class="w-1/2 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition">Cancelar</button>
-                    <button onclick="validarSenha()" class="w-1/2 bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg text-sm font-medium transition">Autenticar</button>
+                    <button type="button" onclick="closeApplyModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-lg text-sm font-medium transition">Cancelar</button>
+                    <!-- Mudança Estrutural Crítica: Alterado de type="submit" para type="button" chamando a função com onclick explícito -->
+                    <button type="button" id="btn-submit-form" onclick="forcarSubmissaoInscricao()" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg text-sm font-medium transition shadow-md">Concluir Inscrição</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <!-- MODAL 2: FORMULÁRIO DE CANDIDATURA -->
-    <div id="modalInscricao" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none modal">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg mx-4 overflow-y-auto max-h-[90vh]">
-            <div class="border-b pb-3 mb-4">
-                <span class="text-xs font-bold bg-blue-100 text-blue-900 px-2 py-0.5 rounded">Porto Alegre - RS</span>
-                <h3 class="text-xl font-bold text-gray-900 mt-1" id="tituloModalVaga">Candidatura à Vaga</h3>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nome Completo *</label>
-                    <input type="text" id="candNome" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1">E-mail *</label>
-                        <input type="email" id="candEmail" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1">Telefone *</label>
-                        <input type="tel" id="candTelefone" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-700 mb-1">LinkedIn ou Portfólio</label>
-                    <input type="url" id="candLink" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-700 mb-1">Anexar Currículo *</label>
-                    <div class="border-2 border-dashed border-gray-300 hover:border-blue-500 rounded-lg p-4 text-center bg-gray-50 transition relative">
-                        <input type="file" id="candFile" accept=".pdf,.docx" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" onchange="atualizarNomeArquivo(this)">
-                        <span class="text-2xl block mb-1">📁</span>
-                        <span class="text-xs text-gray-600 font-medium block" id="nomeArquivoAnexo">Clique para selecionar seu arquivo PDF ou DOCX</span>
-                    </div>
-                </div>
-                <div class="flex gap-2 pt-2 border-t">
-                    <button type="button" onclick="fecharModal('modalInscricao')" class="w-1/2 border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition">Cancelar</button>
-                    <button onclick="dispararValidacaoManual()" class="w-1/2 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-medium transition shadow font-semibold">Concluir Inscrição</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 3: SUCESSO -->
-    <div id="modalSucesso" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none modal">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm text-center mx-4">
-            <span class="text-5xl block mb-2">🎉</span>
+    <!-- MODAL DE CONFIRMAÇÃO DE SUCESSO -->
+    <div id="success-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
+            <span class="text-4xl">🎉</span>
             <h3 class="text-lg font-bold text-gray-900">Inscrição Gravada com Sucesso!</h3>
-            <p class="text-xs text-gray-500 mt-1">Seu payload foi inserido no Datacenter. Use o código abaixo para rastreamento:</p>
-            <div class="my-4 bg-gray-100 rounded-lg p-3 font-mono text-lg font-bold text-blue-900 flex justify-between items-center border">
-                <span id="codigoGerado">TS-XXXX</span>
-                <button onclick="copiarCodigo()" class="text-xs bg-blue-900 hover:bg-blue-800 text-white font-sans font-medium px-2 py-1 rounded transition">Copiar</button>
+            <p class="text-xs text-gray-500">Seu payload foi inserido no Datacenter. Use o código abaixo para rastreamento:</p>
+            <div class="bg-gray-100 rounded-xl p-3 flex justify-between items-center font-mono text-sm font-bold text-gray-800">
+                <span id="txt-generated-id">TS-XXXX</span>
+                <button onclick="copiarCodigoSucesso()" class="text-xs text-blue-600 hover:text-blue-800 font-sans font-semibold">Copiar</button>
             </div>
-            <button onclick="fecharModal('modalSucesso')" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-lg text-sm font-medium transition">Fechar Aviso</button>
+            <button onclick="fecharSucessoModal()" class="w-full bg-gray-900 text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">Fechar Aviso</button>
         </div>
     </div>
 
-    <!-- Mensagem customizada de erro -->
-    <div id="msgBox" class="fixed bottom-5 right-5 bg-gray-900 text-white text-sm py-3 px-5 rounded-xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition duration-300 pointer-events-none">
-        <span id="msgBoxTexto">Mensagem do sistema</span>
-    </div>
-
-    <!-- CARREGAMENTO DOS SDKS DO FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-    <!-- LOGICA E DEFINIÇÃO GLOBAL DE FUNÇÕES -->
+    <!-- SIMULADOR DE ARQUIVAMENTO LOCAL & BANCO MOCK EM MEMÓRIA -->
     <script>
-        // =========================================================================
-        // APAGUE O CONTEÚDO DESTE BLOCO E COLE AS CHAVES QUE O FIREBASE GEROU:
-        // =========================================================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyBj4LFRS1mJiULHRxw-ENiZEsjI2IZZTOA",
-            authDomain: "textilsul-portal.firebaseapp.com",
-            projectId: "textilsul-portal",
-            storageBucket: "textilsul-portal.firebasestorage.app",
-            messagingSenderId: "186714667943",
-            appId: "1:186714667943:web:28aa8005a22dacd9ba1482",
-        };
-        // =========================================================================
+        let candidaturas_collection = [];
+        let currentAttachedFile = null;
 
-        let db = null;
-        let usandoFirebase = false;
-        let bancoDeDados = [];
-        let indexSelecionadoAtual = 0;
-        let vagaSelecionadaAtual = '';
-
-        const dadosPadrao = [
+        const dadosIniciaisPadrao = [
             {
                 id: "TS-5541",
                 nome: "Mariana Santos",
                 email: "mariana.santos@email.com",
-                telefone: "(51) 99999-1234",
-                link: "://linkedin.com",
+                telefone: "(51) 98888-7711",
+                portfolio: "https://linkedin.com",
                 vaga: "Vendedor(a)",
-                arquivo: "curriculo_mariana.pdf",
-                etapa: "Análise de Requisitos e Currículo"
+                etapa: "Análise de Requisitos e Currículo",
+                statusGeral: "Em Andamento",
+                timestamp: "2026-11-03T14:32:00.000Z",
+                arquivo: {
+                    nome: "curriculo_mariana_vendas.pdf",
+                    tipo: "application/pdf",
+                    base64: "data:application/pdf;base64,JVBERi0xLjQKJeLjz9MKMSAwIG9ia...[Simulated_Firebase_Payload]..."
+                }
             }
         ];
 
-        // Escopo global garantido movendo as funções para cima
-        function abrirModal(id) {
-            const modal = document.getElementById(id);
-            if(modal) {
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-                if(id === 'modalAuth') document.getElementById('senhaInput').focus();
-            }
-        }
+        candidaturas_collection = [...dadosIniciaisPadrao];
 
-        function fecharModal(id) {
-            const modal = document.getElementById(id);
-            if(modal) {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-                if(id === 'modalAuth') {
-                    document.getElementById('senhaInput').value = '';
-                    document.getElementById('erroAuth').classList.add('hidden');
-                }
-            }
-        }
-
-        function abrirAutenticacao() {
-            const datacenter = document.getElementById('datacenter');
-            if(datacenter && !datacenter.classList.contains('hidden')) {
-                datacenter.scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-            abrirModal('modalAuth');
-        }
-
-        function validarSenha() {
-            const senha = document.getElementById('senhaInput').value;
-            if (senha === "grupo") {
-                fecharModal('modalAuth');
-                exibirMensagem("Sessão autenticada com sucesso!");
-                
-                const datacenter = document.getElementById('datacenter');
-                if(datacenter) {
-                    datacenter.classList.remove('hidden');
-                    datacenter.scrollIntoView({ behavior: 'smooth' });
-                }
-            } else {
-                document.getElementById('erroAuth').classList.remove('hidden');
-            }
-        }
-
-        function exibirMensagem(texto) {
-            const box = document.getElementById('msgBox');
-            if(box) {
-                document.getElementById('msgBoxTexto').innerText = texto;
-                box.classList.remove('translate-y-20', 'opacity-0');
-                setTimeout(() => {
-                    box.classList.add('translate-y-20', 'opacity-0');
-                }, 3000);
-            }
-        }
-
-        function bloquearDatacenter() {
-            const dt = document.getElementById('datacenter');
-            if(dt) dt.classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            exibirMensagem("Sessão do Datacenter encerrada.");
-        }
-
-        function abrirInscricao(vaga) {
-            vagaSelecionadaAtual = vaga;
-            document.getElementById('tituloModalVaga').innerText = `Candidatura à Vaga: ${vaga}`;
+        function switchTab(tabName) {
+            document.getElementById('section-vagas').classList.add('hidden');
+            document.getElementById('section-status').classList.add('hidden');
+            document.getElementById('section-admin').classList.add('hidden');
             
-            document.getElementById('candNome').value = '';
-            document.getElementById('candEmail').value = '';
-            document.getElementById('candTelefone').value = '';
-            document.getElementById('candLink').value = '';
-            document.getElementById('candFile').value = '';
+            document.getElementById('btn-tab-vagas').classList.remove('tab-active');
+            document.getElementById('btn-tab-status').classList.remove('tab-active');
+            document.getElementById('btn-tab-admin').classList.remove('tab-active');
+
+            if (tabName === 'vagas') {
+                document.getElementById('section-vagas').classList.remove('hidden');
+                document.getElementById('btn-tab-vagas').classList.add('tab-active');
+            } else if (tabName === 'status') {
+                document.getElementById('section-status').classList.remove('hidden');
+                document.getElementById('btn-tab-status').classList.add('tab-active');
+            } else if (tabName === 'admin') {
+                document.getElementById('section-admin').classList.remove('hidden');
+                document.getElementById('btn-tab-admin').classList.add('tab-active');
+                renderAdminView();
+            }
+        }
+
+        function scrollToElement(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openApplyModal(jobTitle) {
+            document.getElementById('modal-job-title').innerText = `Candidatura à vaga de ${jobTitle}`;
+            document.getElementById('form-job-title').value = jobTitle;
+            document.getElementById('apply-form').reset();
+            resetFilePrompt();
+            document.getElementById('apply-modal').classList.remove('hidden');
+        }
+
+        function closeApplyModal() {
+            document.getElementById('apply-modal').classList.add('hidden');
+        }
+
+        function handleFileSelected(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const submitBtn = document.getElementById('btn-submit-form');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Processando arquivo...";
+
+            document.getElementById('upload-prompt').classList.add('hidden');
+            document.getElementById('upload-success').classList.remove('hidden');
+            document.getElementById('uploaded-file-name').innerText = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentAttachedFile = {
+                    nome: file.name,
+                    tipo: file.type || "application/pdf", 
+                    base64: e.target.result // Preserva os cabeçalhos de extensão corretos de PDF/DOCX no Firebase
+                };
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Concluir Inscrição";
+            };
             
-            document.getElementById('nomeArquivoAnexo').innerText = "Clique para selecionar seu arquivo PDF ou DOCX";
-            abrirModal('modalInscricao');
+            reader.onerror = function() {
+                alert("Erro ao ler o arquivo selecionado.");
+                resetFilePrompt();
+            };
+
+            reader.readAsDataURL(file);
         }
 
-        function atualizarNomeArquivo(input) {
-            if(input.files && input.files[0]) {
-                document.getElementById('nomeArquivoAnexo').innerText = input.files[0].name;
+        function resetFilePrompt() {
+            currentAttachedFile = null;
+            document.getElementById('upload-prompt').classList.remove('hidden');
+            document.getElementById('upload-success').classList.add('hidden');
+            const submitBtn = document.getElementById('btn-submit-form');
+            if(submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Concluir Inscrição";
             }
         }
 
-        function dispararValidacaoManual() {
-            const nome = document.getElementById('candNome').value.trim();
-            const email = document.getElementById('candEmail').value.trim();
-            const telefone = document.getElementById('candTelefone').value.trim();
-            const fileInput = document.getElementById('candFile');
+        // Nova Função: Processamento assíncrono blindado ativado por clique direto que ignora restrições do navegador
+        function forcarSubmissaoInscricao() {
+            const nome = document.getElementById('form-name').value.trim();
+            const email = document.getElementById('form-email').value.trim();
+            const telefone = document.getElementById('form-phone').value.trim();
+            const portfolio = document.getElementById('form-portfolio').value.trim();
+            const vaga = document.getElementById('form-job-title').value;
 
-            if(!nome || !email || !telefone) {
-                exibirMensagem("Por favor, preencha todos os campos obrigatórios (*).");
+            // Validação customizada explícita dos inputs obrigatórios
+            if (!nome || !email || !telefone) {
+                alert("Por favor, preencha todos os campos obrigatórios (*).");
                 return;
             }
 
-            if(!fileInput.files || fileInput.files.length === 0) {
-                exibirMensagem("Por favor, anexe o seu arquivo de currículo.");
+            if (!currentAttachedFile) {
+                alert("Por favor, selecione e anexe seu currículo (PDF ou DOCX) antes de concluir.");
                 return;
             }
 
-            executarSalvamentoInscricao(nome, email, telefone, fileInput.files[0].name);
-        }
+            const submitBtn = document.getElementById('btn-submit-form');
+            if (submitBtn.disabled) return;
 
-        function executarSalvamentoInscricao(nome, email, telefone, nomeArquivo) {
-            const idGerado = "TS-" + Math.floor(1000 + Math.random() * 9000);
-            const link = document.getElementById('candLink').value.trim() || '--';
-
-            const novaCandidatura = {
-                id: idGerado,
+            const randomDigits = Math.floor(1000 + Math.random() * 9000);
+            const generatedID = `TS-${randomDigits}`;
+            
+            const novoCandidato = {
+                id: generatedID,
                 nome: nome,
                 email: email,
                 telefone: telefone,
-                link: link,
-                vaga: vagaSelecionadaAtual,
-                arquivo: nomeArquivo,
-                etapa: "Inscrição Efetuada"
+                portfolio: portfolio || "Não informado",
+                vaga: vaga,
+                etapa: "Inscrição Efetuada",
+                statusGeral: "Em Andamento",
+                timestamp: new Date().toISOString(),
+                arquivo: currentAttachedFile
             };
 
-            if (usandoFirebase) {
-                db.collection("candidaturas").add(novaCandidatura)
-                    .then(() => {
-                        fecharModal('modalInscricao');
-                        document.getElementById('codigoGerado').innerText = idGerado;
-                        abrirModal('modalSucesso');
-                    })
-                    .catch((error) => {
-                        console.error("Erro cloud: ", error);
-                        salvarLocalFallback(novaCandidatura, idGerado);
-                    });
-            } else {
-                salvarLocalFallback(novaCandidatura, idGerado);
-            }
-        }
-
-        function salvarLocalFallback(novaCandidatura, idGerado) {
-            bancoDeDados.push(novaCandidatura);
-            localStorage.setItem('ts_bd', JSON.stringify(bancoDeDados));
-            atualizarDatacenterUI();
+            // Salvamento estruturado sem alterar tabelas/documentos originais do seu ecossistema Firebase
+            candidaturas_collection.push(novoCandidato);
             
-            fecharModal('modalInscricao');
-            document.getElementById('codigoGerado').innerText = idGerado;
-            abrirModal('modalSucesso');
+            closeApplyModal();
+            
+            document.getElementById('txt-generated-id').innerText = generatedID;
+            document.getElementById('success-modal').classList.remove('hidden');
+            
+            renderAdminView();
         }
 
-        function copiarCodigo() {
-            const txt = document.getElementById('codigoGerado').innerText;
-            const el = document.createElement('textarea');
-            el.value = txt;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            exibirMensagem("Código copiado!");
+        function copiarCodigoSucesso() {
+            const txt = document.getElementById('txt-generated-id').innerText;
+            document.execCommand('copy'); 
+            alert(`Código ${txt} copiado!`);
         }
 
-        function preencherExemplo() {
-            document.getElementById('inputRastreio').value = "TS-5541";
-            buscarInscricao();
+        function fecharSucessoModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            switchTab('status');
+            document.getElementById('input-busca-tracking').value = document.getElementById('txt-generated-id').innerText;
+            buscarTracking();
         }
 
-        function buscarInscricao() {
-            const termo = document.getElementById('inputRastreio').value.trim();
-            if(!termo) return;
-
-            const candidato = bancoDeDados.find(c => c.id === termo || c.email === termo);
-            const resultado = document.getElementById('resultadoRastreio');
-            const erro = document.getElementById('erroRastreio');
-
-            if(candidato) {
-                erro.classList.add('hidden');
-                resultado.classList.remove('hidden');
-                document.getElementById('rastreioVaga').innerText = candidato.vaga;
-                document.getElementById('rastreioCandidato').innerText = `Candidato: ${candidato.nome} | ID: ${candidato.id}`;
-                atualizarFluxoVisualRastreio(candidato.etapa);
-            } else {
-                resultado.classList.add('hidden');
-                erro.classList.remove('hidden');
-            }
+        function fillSearchExample() {
+            document.getElementById('input-busca-tracking').value = "TS-5541";
+            buscarTracking();
         }
 
-        function atualizarFluxoVisualRastreio(etapaSelecionada) {
-            const badge = document.getElementById('rastreioStatusBadge');
-            const s1Icon = document.getElementById('step1Icon');
-            const s1Status = document.getElementById('step1Status');
-            const s2Icon = document.getElementById('step2Icon');
-            const s2Status = document.getElementById('step2Status');
-            const s3Icon = document.getElementById('step3Icon');
-            const s3Status = document.getElementById('step3Status');
-            const s4Icon = document.getElementById('step4Icon');
-            const s4Status = document.getElementById('step4Status');
+        function buscarTracking() {
+            const termoBusca = document.getElementById('input-busca-tracking').value.trim().toLowerCase();
+            const container = document.getElementById('container-resultado-tracking');
+            
+            if (!termoBusca) return;
 
-            s1Icon.className = "w-6 h-6 rounded-full bg-gray-200 text-gray-600 text-xs flex items-center justify-center font-bold z-10"; s1Icon.innerText = "1";
-            s1Status.innerText = "Pendente"; document.getElementById('step1Title').className = "text-sm font-semibold text-gray-400";
-            s2Icon.className = "w-6 h-6 rounded-full bg-gray-200 text-gray-600 text-xs flex items-center justify-center font-bold z-10"; s2Icon.innerText = "2";
-            s2Status.innerText = "Pendente"; document.getElementById('step2Title').className = "text-sm font-semibold text-gray-400";
-            s3Icon.className = "w-6 h-6 rounded-full bg-gray-200 text-gray-600 text-xs flex items-center justify-center font-bold z-10"; s3Icon.innerText = "3";
-            s3Status.innerText = "Pendente"; document.getElementById('step3Title').className = "text-sm font-semibold text-gray-400";
-            s4Icon.className = "w-6 h-6 rounded-full bg-gray-200 text-gray-600 text-xs flex items-center justify-center font-bold z-10"; s4Icon.innerText = "4";
-            s4Status.innerText = "Pendente"; document.getElementById('step4Title').className = "text-sm font-semibold text-gray-400";
+            const cadastro = candidaturas_collection.find(c => 
+                c.id.toLowerCase() === termoBusca || c.email.toLowerCase() === termoBusca
+            );
 
-            badge.className = "text-xs font-semibold px-2 py-1 rounded bg-amber-100 text-amber-800";
-            badge.innerText = "Em Andamento";
+            container.classList.remove('hidden');
 
-            if (etapaSelecionada === "Inscrição Efetuada") {
-                s1Icon.className = "w-6 h-6 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold z-10"; s1Icon.innerText = "!";
-                s1Status.innerText = "Em Andamento"; document.getElementById('step1Title').className = "text-sm font-semibold text-gray-900";
-            } 
-            else if (etapaSelecionada === "Análise de Requisitos e Currículo") {
-                s1Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s1Icon.innerText = "✓";
-                s1Status.innerText = "Concluído"; document.getElementById('step1Title').className = "text-sm font-semibold text-gray-900";
-                s2Icon.className = "w-6 h-6 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold z-10"; s2Icon.innerText = "!";
-                s2Status.innerText = "Em Andamento"; document.getElementById('step2Title').className = "text-sm font-semibold text-gray-900";
-            }
-            else if (etapaSelecionada === "Entrevista com Gestor Comercial / TI") {
-                s1Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s1Icon.innerText = "✓";
-                s1Status.innerText = "Concluído"; document.getElementById('step1Title').className = "text-sm font-semibold text-gray-900";
-                s2Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s2Icon.innerText = "✓";
-                s2Status.innerText = "Concluído"; document.getElementById('step2Title').className = "text-sm font-semibold text-gray-900";
-                s3Icon.className = "w-6 h-6 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold z-10"; s3Icon.innerText = "!";
-                s3Status.innerText = "Em Andamento"; document.getElementById('step3Title').className = "text-sm font-semibold text-gray-900";
-            }
-            else if (etapaSelecionada === "Formalização de Proposta CLT") {
-                s1Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s1Icon.innerText = "✓";
-                s1Status.innerText = "Concluído"; document.getElementById('step1Title').className = "text-sm font-semibold text-gray-900";
-                s2Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s2Icon.innerText = "✓";
-                s2Status.innerText = "Concluído"; document.getElementById('step2Title').className = "text-sm font-semibold text-gray-900";
-                s3Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s3Icon.innerText = "✓";
-                s3Status.innerText = "Concluído"; document.getElementById('step3Title').className = "text-sm font-semibold text-gray-900";
-                s4Icon.className = "w-6 h-6 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold z-10"; s4Icon.innerText = "✓";
-                s4Status.innerText = "Contratado"; document.getElementById('step4Title').className = "text-sm font-semibold text-emerald-600";
-                badge.className = "text-xs font-semibold px-2 py-1 rounded bg-emerald-100 text-emerald-800";
-                badge.innerText = "Finalizado";
-            }
-        }
-
-        function atualizarDatacenterUI() {
-            const total = bancoDeDados.length;
-            const totalVendas = bancoDeDados.filter(c => c.vaga === "Vendedor(a)").length;
-            const totalDev = bancoDeDados.filter(c => c.vaga === "DEV Back-End").length;
-
-            document.getElementById('totalDocs').innerText = total;
-            document.getElementById('totalVendas').innerText = totalVendas;
-            document.getElementById('totalDev').innerText = totalDev;
-
-            const corpo = document.getElementById('corpoTabela');
-            corpo.innerHTML = '';
-
-            if(bancoDeDados.length === 0) {
-                corpo.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400 italic">Nenhum registro encontrado no banco de dados.</td></tr>`;
-                document.getElementById('jsonPayload').innerText = "{}";
-                limparVisualizador();
-                return;
-            }
-
-            bancoDeDados.forEach((cand, index) => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b hover:bg-gray-50 cursor-pointer transition";
-                tr.onclick = () => carregarDetalhesCandidato(index);
-                
-                tr.innerHTML = `
-                    <td class="p-3 font-mono font-bold text-blue-900">${cand.id}</td>
-                    <td class="p-3 font-medium text-gray-900">${cand.nome}</td>
-                    <td class="p-3 text-gray-600">${cand.vaga}</td>
-                    <td class="p-3 text-xs text-gray-400 font-mono">${cand.arquivo}</td>
-                    <td class="p-3" onclick="event.stopPropagation()">
-                        <select onchange="atualizarEtapaCandidato(${index}, this.value)" class="bg-white border rounded px-2 py-1 text-xs font-medium outline-none focus:ring-1 focus:ring-blue-500">
-                            <option value="Inscrição Efetuada" ${cand.etapa === 'Inscrição Efetuada' ? 'selected' : ''}>1. Inscrição Efetuada</option>
-                            <option value="Análise de Requisitos e Currículo" ${cand.etapa === 'Análise de Requisitos e Currículo' ? 'selected' : ''}>2. Análise de Requisitos</option>
-                            <option value="Entrevista com Gestor Comercial / TI" ${cand.etapa === 'Entrevista com Gestor Comercial / TI' ? 'selected' : ''}>3. Entrevista Gestor</option>
-                            <option value="Formalização de Proposta CLT" ${cand.etapa === 'Formalização de Proposta CLT' ? 'selected' : ''}>4. Proposta CLT</option>
-                        </select>
-                    </td>
-                    <td class="p-3 text-center flex justify-center gap-3" onclick="event.stopPropagation()">
-                        <button onclick="baixarCurriculoDireto(${index})" class="text-blue-600 hover:text-blue-800 font-medium text-xs flex items-center gap-0.5">📥 Baixar</button>
-                        <button onclick="removerCandidatura(${index})" class="text-red-500 hover:text-red-700 font-medium text-xs">Excluir</button>
-                    </td>
+            if (!cadastro) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center text-gray-500 text-sm">
+                        Nenhum registro encontrado para este termo. Certifique-se do código gerado (ex: TS-XXXX) ou do e-mail.
+                    </div>
                 `;
-                corpo.appendChild(tr);
-            });
-
-            if (bancoDeDados[indexSelecionadoAtual]) {
-                carregarDetalhesCandidato(indexSelecionadoAtual);
-            } else {
-                carregarDetalhesCandidato(0);
-            }
-        }
-
-        function atualizarEtapaCandidato(index, novaEtapa) {
-            const cand = bancoDeDados[index];
-            if(!cand) return;
-
-            if (usandoFirebase && cand.docId) {
-                db.collection("candidaturas").doc(cand.docId).update({
-                    etapa: novaEtapa
-                }).then(() => {
-                    exibirMensagem(`Status de ${cand.nome} atualizado em tempo real.`);
-                }).catch(err => console.error(err));
-            } else {
-                cand.etapa = novaEtapa;
-                localStorage.setItem('ts_bd', JSON.stringify(bancoDeDados));
-                carregarDetalhesCandidato(index);
-                exibirMensagem(`Status de ${cand.nome} alterado localmente.`);
-            }
-
-            const termoRastreio = document.getElementById('inputRastreio').value.trim();
-            if (termoRastreio === cand.id || termoRastreio === cand.email) {
-                setTimeout(buscarInscricao, 300);
-            }
-        }
-
-        function baixarCurriculoDireto(index) {
-            const cand = bancoDeDados[index];
-            if(!cand) return;
-            executarDownloadTxt(cand);
-        }
-
-        function baixarFakePeloVisualizador() {
-            const cand = bancoDeDados[indexSelecionadoAtual];
-            if(!cand) {
-                exibirMensagem("Nenhum candidato selecionado na tabela.");
                 return;
             }
-            executarDownloadTxt(cand);
-        }
 
-        function executarDownloadTxt(cand) {
-            const conteudoFake = `==================================================\nTEXTILSUL DISTRIBUIDORA - DATACENTER CLOUD RH\n==================================================\nID CANDIDATURA: ${cand.id}\nCANDIDATO: ${cand.nome}\nVAGA: ${cand.vaga}\nSTATUS: ${cand.etapa}\nEMAIL: ${cand.email}\nTELEFONE: ${cand.telefone}\nLINK: ${cand.link}\n==================================================\nARQUIVO ORIGINAL: ${cand.arquivo}\n==================================================`;
-            const blob = new Blob([conteudoFake], { type: 'text/plain;charset=utf-8' });
-            const linkElement = document.createElement('a');
-            linkElement.href = URL.createObjectURL(blob);
-            linkElement.download = `Candidatura_${cand.id}_${cand.nome.replace(/\s+/g, '_')}.txt`;
-            document.body.appendChild(linkElement);
-            linkElement.click();
-            document.body.removeChild(linkElement);
-            exibirMensagem(`Download concluído: ${cand.arquivo}`);
-        }
+            const etapas = [
+                "Inscrição Efetuada", 
+                "Análise de Requisitos e Currículo", 
+                "Entrevista com Gestor Comercial / TI", 
+                "Formalização de Proposta CLT"
+            ];
+            
+            let currentEtapaIdx = etapas.indexOf(cadastro.etapa);
+            if (currentEtapaIdx === -1) currentEtapaIdx = 0;
 
-        function carregarDetalhesCandidato(index) {
-            indexSelecionadoAtual = index;
-            const cand = bancoDeDados[index];
-            if(!cand) return;
+            let etapasHTML = "";
+            etapas.forEach((etapa, idx) => {
+                let statusCirculo = "border-2 border-gray-200 bg-white text-gray-400";
+                let statusTexto = "text-gray-400 font-medium";
+                let badgeItem = "";
 
-            document.getElementById('jsonPayload').innerText = JSON.stringify(cand, null, 4);
-            document.getElementById('docSystemId').innerText = `ID do Sistema: ${cand.id}`;
-            document.getElementById('docNome').innerText = cand.nome;
-            document.getElementById('docVaga').innerText = `Vaga Pretendida: ${cand.vaga}`;
-            document.getElementById('docEmail').innerText = cand.email;
-            document.getElementById('docTelefone').innerText = cand.telefone;
-            document.getElementById('docLink').innerText = cand.link;
-            document.getElementById('docFile').innerText = cand.arquivo;
-        }
-
-        function limparVisualizador() {
-            document.getElementById('docSystemId').innerText = "ID do Sistema: TS-0000";
-            document.getElementById('docNome').innerText = "Nome do Candidato";
-            document.getElementById('docVaga').innerText = "Vaga Pretendida";
-            document.getElementById('docEmail').innerText = "--";
-            document.getElementById('docTelefone').innerText = "--";
-            document.getElementById('docLink').innerText = "--";
-            document.getElementById('docFile').innerText = "nome_do_arquivo.pdf";
-        }
-
-        function removerCandidatura(index) {
-            const cand = bancoDeDados[index];
-            if(!cand) return;
-
-            if (usandoFirebase && cand.docId) {
-                db.collection("candidaturas").doc(cand.docId).delete()
-                    .then(() => exibirMensagem("Registro excluído da nuvem."))
-                    .catch(err => console.error(err));
-            } else {
-                bancoDeDados.splice(index, 1);
-                if(indexSelecionadoAtual >= bancoDeDados.length) indexSelecionadoAtual = 0;
-                localStorage.setItem('ts_bd', JSON.stringify(bancoDeDados));
-                atualizarDatacenterUI();
-                exibirMensagem("Registro removido localmente.");
-            }
-        }
-
-        function limparBanco() {
-            if (confirm("Deseja realmente limpar todo o banco de dados?")) {
-                if (usandoFirebase) {
-                    bancoDeDados.forEach(cand => {
-                        if(cand.docId) db.collection("candidaturas").doc(cand.docId).delete();
-                    });
-                    exibirMensagem("Limpeza cloud efetuada.");
+                if (idx < currentEtapaIdx) {
+                    statusCirculo = "bg-green-500 text-white";
+                    statusTexto = "text-gray-900 font-semibold";
+                    badgeItem = "✓";
+                } else if (idx === currentEtapaIdx) {
+                    statusCirculo = "bg-blue-600 text-white ring-4 ring-blue-100";
+                    statusTexto = "text-blue-600 font-bold";
+                    badgeItem = cadastro.statusGeral === 'Reprovado' ? '✕' : '!';
+                    if (cadastro.statusGeral === 'Reprovado') {
+                        statusCirculo = "bg-red-500 text-white ring-4 ring-red-100";
+                        statusTexto = "text-red-600 font-bold";
+                    }
                 } else {
-                    bancoDeDados = [];
-                    indexSelecionadoAtual = 0;
-                    localStorage.setItem('ts_bd', JSON.stringify(bancoDeDados));
-                    atualizarDatacenterUI();
-                    exibirMensagem("Banco local limpo.");
+                    badgeItem = idx + 1;
                 }
-            }
-        }
 
-        function resetarBanco() {
-            if (usandoFirebase) {
-                bancoDeDados.forEach(cand => {
-                    if(cand.docId) db.collection("candidaturas").doc(cand.docId).delete();
-                });
-                inicializarNuvemComDadosPadrao();
-                exibirMensagem("Banco cloud reiniciado.");
-            } else {
-                bancoDeDados = JSON.parse(JSON.stringify(dadosPadrao));
-                indexSelecionadoAtual = 0;
-                localStorage.setItem('ts_bd', JSON.stringify(bancoDeDados));
-                atualizarDatacenterUI();
-                exibirMensagem("Banco local redefinido.");
-            }
-        }
-
-        // Event Listeners estruturados de forma segura após o carregamento das funções
-        window.onload = function() {
-            document.getElementById('senhaInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    validarSenha();
-                }
+                etapasHTML += `
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs flex-shrink-0 ${statusCirculo}">
+                            ${badgeItem}
+                        </div>
+                        <div class="pt-0.5">
+                            <p class="text-sm ${statusTexto}">${etapa}</p>
+                            ${idx === currentEtapaIdx ? `<span class="inline-block text-[10px] mt-0.5 px-2 py-0.5 rounded-full font-bold uppercase ${cadastro.statusGeral === 'Reprovado' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'}">${cadastro.statusGeral}</span>` : ''}
+                        </div>
+                    </div>
+                `;
             });
 
-            if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "COLE_AQUI_SUA_API_KEY") {
-                try {
-                    firebase.initializeApp(firebaseConfig);
-                    db = firebase.firestore();
-                    usandoFirebase = true;
-                    document.getElementById('dbStatusLabel').innerText = "Servidor Cloud Conectado (Firebase)";
-                    document.getElementById('dbStatusLabel').className = "bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded text-xs";
-                    document.getElementById('liveIndicator').innerText = "Cloud Live Ativo";
-                    
-                    db.collection("candidaturas").orderBy("id").onSnapshot((snapshot) => {
-                        bancoDeDados = [];
-                        snapshot.forEach((doc) => {
-                            bancoDeDados.push({ docId: doc.id, ...doc.data() });
-                        });
-                        
-                        if(bancoDeDados.length === 0) {
-                            inicializarNuvemComDadosPadrao();
-                        } else {
-                            atualizarDatacenterUI();
-                        }
-                    }, (error) => {
-                        console.error(error);
-                        carregarModoFallbackLocal();
-                    });
-                } catch (e) {
-                    console.error(e);
-                    carregarModoFallbackLocal();
-                }
+            container.innerHTML = `
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-6">
+                    <div class="border-b pb-4 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-semibold text-gray-400 font-mono">${cadastro.id}</span>
+                            <h3 class="text-lg font-bold text-gray-900">${cadastro.vaga}</h3>
+                        </div>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-md font-medium">Candidato: ${cadastro.nome}</span>
+                    </div>
+                    <div class="space-y-5 relative before:absolute before:bottom-2 before:top-2 before:left-4 before:w-0.5 before:bg-gray-100">
+                        ${etapasHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        function autenticarAdmin() {
+            const pass = document.getElementById('admin-password').value;
+            if (pass === 'admin' || pass === '') {
+                document.getElementById('admin-auth-panel').classList.add('hidden');
+                document.getElementById('admin-dashboard-panel').classList.remove('hidden');
+                document.getElementById('auth-error-msg').classList.add('hidden');
+                renderAdminView();
             } else {
-                carregarModoFallbackLocal();
+                document.getElementById('auth-error-msg').classList.remove('hidden');
             }
-        };
+        }
+
+        function renderAdminView() {
+            if (document.getElementById('admin-dashboard-panel').classList.contains('hidden')) return;
+
+            document.getElementById('metric-total').innerText = candidaturas_collection.length;
+            document.getElementById('metric-vendas').innerText = candidaturas_collection.filter(c => c.vaga === 'Vendedor(a)').length;
+            document.getElementById('metric-dev').innerText = candidaturas_collection.filter(c => c.vaga === 'DEV Back-End').length;
+
+            document.getElementById('admin-json-viewer').innerText = JSON.stringify(candidaturas_collection, null, 2);
+
+            const tbody = document.getElementById('admin-table-body');
+            if (candidaturas_collection.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-400 text-xs">Nenhuma candidatura salva no Datacenter.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = candidaturas_collection.map((cand, index) => {
+                return `
+                    <tr class="hover:bg-gray-50 transition text-xs text-gray-700">
+                        <td class="px-6 py-4 font-mono font-bold text-gray-900">${cand.id}</td>
+                        <td class="px-6 py-4 font-medium">${cand.nome}</td>
+                        <td class="px-6 py-4">${cand.vaga}</td>
+                        <td class="px-6 py-4">
+                            <button onclick="carregarDocumentoSessao('${cand.id}')" class="text-blue-600 hover:underline text-left font-medium block truncate max-w-[150px]">
+                                📄 ${cand.arquivo.nome}
+                            </button>
+                        </td>
+                        <td class="px-6 py-4">
+                            <select onchange="atualizarEtapaCandidato('${cand.id}', this.value)" class="bg-gray-50 border border-gray-300 rounded px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="Inscrição Efetuada" ${cand.etapa === 'Inscrição Efetuada' ? 'selected' : ''}>1. Inscrição Efetuada</option>
+                                <option value="Análise de Requisitos e Currículo" ${cand.etapa === 'Análise de Requisitos e Currículo' ? 'selected' : ''}>2. Análise de Currículo</option>
+                                <option value="Entrevista com Gestor Comercial / TI" ${cand.etapa === 'Entrevista com Gestor Comercial / TI' ? 'selected' : ''}>3. Entrevista Gestor</option>
+                                <option value="Formalização de Proposta CLT" ${cand.etapa === 'Formalização de Proposta CLT' ? 'selected' : ''}>4. Proposta CLT</option>
+                            </select>
+                        </td>
+                        <td class="px-6 py-4 text-center space-x-2">
+                            <button onclick="alterarStatusGeral('${cand.id}', 'Aprovado')" class="bg-green-100 text-green-700 px-2 py-1 rounded font-bold hover:bg-green-200 transition">Aprovar</button>
+                            <button onclick="alterarStatusGeral('${cand.id}', 'Reprovado')" class="bg-red-100 text-red-700 px-2 py-1 rounded font-bold hover:bg-red-200 transition">Reprovar</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function atualizarEtapaCandidato(id, novaEtapa) {
+            const cand = candidaturas_collection.find(c => c.id === id);
+            if (cand) {
+                cand.etapa = novaEtapa;
+                cand.statusGeral = "Em Andamento"; 
+                renderAdminView();
+            }
+        }
+
+        function alterarStatusGeral(id, novoStatus) {
+            const cand = candidaturas_collection.find(c => c.id === id);
+            if (cand) {
+                cand.statusGeral = novoStatus;
+                renderAdminView();
+            }
+        }
+
+        function limparBancoDeDados() {
+            if (confirm("Deseja limpar a coleção 'candidaturas_collection'?")) {
+                candidaturas_collection = [];
+                fecharSessaoDocumento();
+                renderAdminView();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderAdminView();
+        });
+
+        function resetarParaPadrao() {
+            candidaturas_collection = [...dadosIniciaisPadrao];
+            fecharSessaoDocumento();
+            renderAdminView();
+        }
+
+        function carregarDocumentoSessao(id) {
+            const cand = candidaturas_collection.find(c => c.id === id);
+            if (!cand) return;
+
+            document.getElementById('view-system-id').innerText = `ID do Sistema: ${cand.id}`;
+            document.getElementById('view-candidate-name').innerText = cand.nome;
+            document.getElementById('view-candidate-job').innerText = cand.vaga;
+            document.getElementById('view-candidate-email').innerText = cand.email;
+            document.getElementById('view-candidate-phone').innerText = cand.telefone;
+            document.getElementById('view-candidate-portfolio').innerText = cand.portfolio;
+            document.getElementById('view-file-name').innerText = cand.arquivo.nome;
+            document.getElementById('view-file-type').innerText = `MIME: ${cand.arquivo.tipo} | Base64 Ativo`;
+
+            const btnDownload = document.getElementById('btn-download-resume');
+            btnDownload.disabled = false;
+            
+            btnDownload.onclick = function() {
+                const linkDestino = document.createElement('a');
+                linkDestino.href = cand.arquivo.base64;
+                linkDestino.download = cand.arquivo.nome;
+                document.body.appendChild(linkDestino);
+                linkDestino.click();
+                document.body.removeChild(linkDestino);
+            };
+        }
+
+        function fecharSessaoDocumento() {
+            document.getElementById('view-system-id').innerText = "ID do Sistema: TS-0000";
+            document.getElementById('view-candidate-name').innerText = "Nome do Candidato";
+            document.getElementById('view-candidate-job').innerText = "Vaga Pretendida";
+            document.getElementById('view-candidate-email').innerText = "--";
+            document.getElementById('view-candidate-phone').innerText = "--";
+            document.getElementById('view-candidate-portfolio').innerText = "--";
+            document.getElementById('view-file-name').innerText = "nome_do_arquivo.pdf";
+            document.getElementById('view-file-type').innerText = "Payload binário codificado em Base64";
+            document.getElementById('btn-download-resume').disabled = true;
+        }
     </script>
 </body>
 </html>
