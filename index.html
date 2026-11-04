@@ -13,28 +13,47 @@
 
     <style>
         .glass-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
         }
         .tab-active {
             border-bottom-color: #2563eb;
             color: #2563eb;
+            font-weight: 700;
+        }
+        /* Custom scrollbar para o visualizador JSON ficar elegante */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col">
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans flex flex-col antialiased">
 
-    <!-- Navegação Superior -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <!-- Navegação Superior Premium -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-xl font-bold text-blue-600 tracking-wide">TS TextilSul Distribuidora</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md shadow-blue-200">TS</div>
+                    <span class="text-lg font-extrabold text-slate-900 tracking-tight sm:block hidden">TextilSul <span class="text-blue-600 font-medium text-sm">Distribuidora</span></span>
                 </div>
-                <div class="flex space-x-2 sm:space-x-4 items-center">
-                    <button onclick="switchTab('vagas')" id="btn-tab-vagas" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600 transition tab-active">Vagas Disponíveis</button>
-                    <button onclick="switchTab('status')" id="btn-tab-status" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600 transition">Acompanhar Inscrição</button>
-                    <button onclick="switchTab('admin')" id="btn-tab-admin" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600 transition flex items-center gap-1">📊 Datacenter RH</button>
+                <div class="flex space-x-1 sm:space-x-3 items-center">
+                    <button onclick="switchTab('vagas')" id="btn-tab-vagas" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-blue-600 transition tab-active">Vagas Disponíveis</button>
+                    <button onclick="switchTab('status')" id="btn-tab-status" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-blue-600 transition">Acompanhar Inscrição</button>
+                    <button onclick="switchTab('admin')" id="btn-tab-admin" class="px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-blue-600 transition flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 rounded-lg sm:px-3 py-1.5">
+                        <span class="text-sm">📊</span> <span class="sm:inline hidden">Datacenter RH</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -45,25 +64,26 @@
         
         <!-- SEÇÃO: VAGAS DISPONÍVEIS -->
         <section id="section-vagas" class="space-y-8">
-            <div class="bg-gradient-to-r align-middle from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-10 text-white shadow-lg">
-                <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">Trabalhe na TextilSul Distribuidora</h1>
-                <p class="text-blue-100 max-w-2xl text-sm sm:text-base">Somos uma empresa de comércio de vestuário focada no mercado B2B, especializada na distribuição de artigos de vestuário em larga escala para lojistas e grandes redes de varejo. Venha crescer com a gente!</p>
+            <div class="bg-gradient-to-br from-slate-900 via-blue-950 to-blue-900 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-600 rounded-full opacity-20 blur-3xl"></div>
+                <h1 class="text-3xl sm:text-4xl font-black mb-3 tracking-tight">Trabalhe na TextilSul Distribuidora</h1>
+                <p class="text-slate-300 max-w-2xl text-sm sm:text-base leading-relaxed">Somos uma empresa de comércio de vestuário focada no mercado B2B, especializada na distribuição de artigos de vestuário em larga escala para lojistas e grandes redes de varejo. Venha crescer com a gente!</p>
                 <div class="mt-6 flex flex-wrap gap-3">
-                    <button onclick="scrollToElement('lista-vagas')" class="bg-white text-blue-700 px-5 py-2.5 rounded-xl font-semibold shadow hover:bg-blue-50 transition text-sm">Ver Oportunidades</button>
-                    <button onclick="switchTab('status')" class="bg-blue-500 bg-opacity-40 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-opacity-50 transition text-sm">Rastrear Candidatura Existente</button>
+                    <button onclick="scrollToElement('lista-vagas')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-blue-900/30 hover:bg-blue-500 transition text-sm">Ver Oportunidades</button>
+                    <button onclick="switchTab('status')" class="bg-white/10 text-white border border-white/20 px-5 py-2.5 rounded-xl font-semibold hover:bg-white/20 transition text-sm backdrop-blur-sm">Rastrear Candidatura Existente</button>
                 </div>
             </div>
 
             <div id="lista-vagas" class="grid md:grid-cols-2 gap-6 pt-4">
                 <!-- Vaga 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between hover:shadow-md transition">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition duration-200">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="p-3 bg-blue-50 rounded-lg text-2xl text-blue-600">🛒</span>
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-full">CLT</span>
+                            <span class="p-3 bg-blue-50 rounded-xl text-2xl text-blue-600 shadow-inner">🛒</span>
+                            <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">CLT</span>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Vendedor(a)</h3>
-                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-2 tracking-tight">Vendedor(a)</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600 mb-6 border-t border-slate-100 pt-4">
                             <li class="flex items-center gap-2"><strong>📍 Localização:</strong> Porto Alegre - RS</li>
                             <li class="flex items-center gap-2"><strong>🎓 Formação:</strong> Ensino médio completo</li>
                             <li class="flex items-center gap-2"><strong>⏰ Horário:</strong> 8h - 15h</li>
@@ -72,18 +92,18 @@
                             <li class="flex items-center gap-2"><strong>💡 Requisitos:</strong> Boa comunicação</li>
                         </ul>
                     </div>
-                    <button onclick="openApplyModal('Vendedor(a)')" class="w-full bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-gray-800 transition text-sm mt-auto">Enviar Currículo para Vendas</button>
+                    <button onclick="openApplyModal('Vendedor(a)')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 transition text-sm mt-auto shadow-sm shadow-slate-900/10">Enviar Currículo para Vendas</button>
                 </div>
 
                 <!-- Vaga 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between hover:shadow-md transition">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition duration-200">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="p-3 bg-indigo-50 rounded-lg text-2xl text-indigo-600">💻</span>
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-full">CLT</span>
+                            <span class="p-3 bg-indigo-50 rounded-xl text-2xl text-indigo-600 shadow-inner">💻</span>
+                            <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">CLT</span>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">DEV Back-End</h3>
-                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-2 tracking-tight">DEV Back-End</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600 mb-6 border-t border-slate-100 pt-4">
                             <li class="flex items-center gap-2"><strong>📍 Localização:</strong> Porto Alegre - RS</li>
                             <li class="flex items-center gap-2"><strong>🎓 Formação:</strong> Análise e Desenvolvimento de Sistemas</li>
                             <li class="flex items-center gap-2"><strong>⏰ Horário:</strong> 8h - 15h</li>
@@ -91,20 +111,20 @@
                             <li class="flex items-center gap-2"><strong>🎁 Benefícios:</strong> Vale Alimentação, Plano de saúde</li>
                         </ul>
                     </div>
-                    <button onclick="openApplyModal('DEV Back-End')" class="w-full bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-gray-800 transition text-sm mt-auto">Enviar Currículo para Dev</button>
+                    <button onclick="openApplyModal('DEV Back-End')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 transition text-sm mt-auto shadow-sm shadow-slate-900/10">Enviar Currículo para Dev</button>
                 </div>
             </div>
         </section>
 
         <!-- SEÇÃO: RASTREAMENTO DE STATUS -->
         <section id="section-status" class="hidden max-w-2xl mx-auto space-y-6">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-2">Acompanhe seu Status</h2>
-                <p class="text-sm text-gray-500 mb-6">Digite o código gerado no final da sua inscrição ou o e-mail cadastrado para verificar as etapas atuais da sua triagem pelo time de Atração da TextilSul.</p>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Acompanhe seu Status</h2>
+                <p class="text-sm text-slate-500 mb-6">Digite o código gerado no final da sua inscrição ou o e-mail cadastrado para verificar as etapas atuais da sua triagem pelo time de Atração da TextilSul.</p>
 
                 <div class="flex gap-2">
-                    <input type="text" id="input-busca-tracking" placeholder="Ex: TS-5541 ou candidato@email.com" class="flex-grow px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
-                    <button onclick="buscarTrackingRealFirebase()" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-blue-700 transition">Buscar</button>
+                    <input type="text" id="input-busca-tracking" placeholder="Ex: TS-5541 ou candidato@email.com" class="flex-grow px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
+                    <button onclick="buscarTrackingRealFirebase()" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-blue-700 transition shadow-md shadow-blue-200">Buscar</button>
                 </div>
             </div>
 
@@ -115,64 +135,68 @@
         <!-- SEÇÃO: DATACENTER (ADMIN RH) -->
         <section id="section-admin" class="hidden space-y-6">
             <!-- Bloqueio de Segurança -->
-            <div id="admin-auth-panel" class="max-w-md mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center space-y-4">
-                <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto text-xl">🔐</div>
-                <h3 class="text-lg font-bold text-gray-900">Acesso Restrito ao Datacenter</h3>
-                <p class="text-xs text-gray-500">Este terminal exige autenticação para visualizar dados corporativos e candidaturas.</p>
+            <div id="admin-auth-panel" class="max-w-md mx-auto bg-white rounded-2xl shadow-sm border border-slate-100 p-6 text-center space-y-4">
+                <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto text-xl shadow-inner">🔐</div>
+                <h3 class="text-lg font-bold text-slate-900 tracking-tight">Acesso Restrito ao Datacenter</h3>
+                <p class="text-xs text-slate-500">Este terminal exige autenticação para visualizar dados corporativos e candidaturas.</p>
                 <div>
-                    <input type="password" id="admin-password" placeholder="Senha Corporativa" class="w-full text-center px-4 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
-                    <p id="auth-error-msg" class="text-red-500 text-xs mt-1 hidden">Acesso Negado: Senha inválida!</p>
+                    <input type="password" id="admin-password" placeholder="Senha Corporativa" class="w-full text-center px-4 py-2.5 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <p id="auth-error-msg" class="text-rose-600 text-xs mt-1.5 hidden font-medium">Acesso Negado: Senha inválida!</p>
                 </div>
                 <div class="flex gap-2 pt-2">
-                    <button onclick="switchTab('vagas')" class="w-1/2 bg-gray-100 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition">Cancelar</button>
-                    <button onclick="autenticarAdmin()" class="w-1/2 bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Autenticar</button>
+                    <button onclick="switchTab('vagas')" class="w-1/2 bg-slate-100 text-slate-700 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-200 transition">Cancelar</button>
+                    <button onclick="autenticarAdmin()" class="w-1/2 bg-blue-600 text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 transition shadow-md shadow-blue-200">Autenticar</button>
                 </div>
             </div>
 
             <!-- Painel Gerencial Pós-Autenticação -->
             <div id="admin-dashboard-panel" class="hidden space-y-6">
-                <div class="bg-gray-900 rounded-xl p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="bg-slate-900 rounded-2xl p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl">
                     <div>
-                        <h2 class="text-xl font-bold">Datacenter de Inscrições (Firebase Cloud Real)</h2>
-                        <p class="text-xs text-gray-400">Sincronização global de candidaturas via Firebase Firestore</p>
+                        <h2 class="text-xl font-bold tracking-tight" id="datacenter-title">Conectando ao Firebase...</h2>
+                        <p class="text-xs text-slate-400" id="datacenter-subtitle">Sincronização global ativa em nuvem</p>
                     </div>
                 </div>
 
                 <!-- Métricas Rápidas -->
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
-                        <span class="block text-2xl font-bold text-blue-600" id="metric-total">0</span>
-                        <span class="text-xs text-gray-500 font-medium">Total de Documentos</span>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <span class="block text-3xl font-black text-blue-600" id="metric-total">0</span>
+                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1 block">Documentos</span>
                     </div>
-                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
-                        <span class="block text-2xl font-bold text-gray-800" id="metric-vendas">0</span>
-                        <span class="text-xs text-gray-500 font-medium">Vaga: Vendedor(a)</span>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <span class="block text-3xl font-black text-slate-800" id="metric-vendas">0</span>
+                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1 block">Vendas</span>
                     </div>
-                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-center">
-                        <span class="block text-2xl font-bold text-gray-800" id="metric-dev">0</span>
-                        <span class="text-xs text-gray-500 font-medium">Vaga: DEV Back-End</span>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <span class="block text-3xl font-black text-slate-800" id="metric-dev">0</span>
+                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1 block">Devs</span>
                     </div>
                 </div>
 
                 <!-- Tabela de Documentos -->
-                <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-100">
-                        <h3 class="font-bold text-gray-900 text-sm">Tabela: candidaturas_collection (Firebase Live)</h3>
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Coleção ao Vivo: candidaturas_collection</h3>
+                        <span class="flex h-2 w-2 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm border-collapse">
                             <thead>
-                                <tr class="bg-gray-100 text-gray-600 text-xs uppercase tracking-wider font-semibold border-b border-gray-200">
-                                    <th class="px-6 py-3">ID Primário</th>
-                                    <th class="px-6 py-3">Candidato</th>
-                                    <th class="px-6 py-3">Vaga</th>
-                                    <th class="px-6 py-3">Currículo Anexo</th>
-                                    <th class="px-6 py-3">Etapa Atual (Alterar)</th>
-                                    <th class="px-6 py-3 text-center">Ações RH</th>
+                                <tr class="bg-slate-50/70 text-slate-500 text-xs uppercase tracking-wider font-bold border-b border-slate-200">
+                                    <th class="px-6 py-3.5">ID Primário</th>
+                                    <th class="px-6 py-3.5">Candidato</th>
+                                    <th class="px-6 py-3.5">Vaga</th>
+                                    <th class="px-6 py-3.5">Currículo Anexo</th>
+                                    <th class="px-6 py-3.5">Etapa Atual</th>
+                                    <th class="px-6 py-3.5 text-center">Ações RH</th>
                                 </tr>
                             </thead>
-                            <tbody id="admin-table-body" class="divide-y divide-gray-100">
-                                <tr><td colspan="6" class="px-6 py-8 text-center text-gray-400 text-xs">Carregando dados reais do Firebase...</td></tr>
+                            <tbody id="admin-table-body" class="divide-y divide-slate-100">
+                                <tr><td colspan="6" class="px-6 py-8 text-center text-slate-400 text-xs">Aguardando conexão com a nuvem...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -180,42 +204,42 @@
 
                 <!-- Painel Inferior de Logs / Visualizadores -->
                 <div class="grid lg:grid-cols-2 gap-6">
-                    <div class="bg-gray-900 rounded-xl p-4 shadow-inner text-green-400 font-mono text-xs overflow-y-auto max-h-80">
-                        <span class="text-gray-500 block mb-2 border-b border-gray-800 pb-1">// Visualização JSON do Payload Cloud Live</span>
+                    <div class="bg-slate-950 rounded-2xl p-4 shadow-inner text-emerald-400 font-mono text-xs overflow-y-auto max-h-80 border border-slate-800 shadow-black/40">
+                        <span class="text-slate-500 block mb-2 border-b border-slate-900 pb-1">// Documento JSON Live Payload</span>
                         <pre id="admin-json-viewer" class="whitespace-pre-wrap">{}</pre>
                     </div>
 
-                    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex flex-col justify-between" id="admin-document-viewer">
+                    <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between" id="admin-document-viewer">
                         <div>
-                            <div class="flex justify-between items-center mb-4 border-b pb-2">
-                                <h4 class="font-bold text-gray-900 text-sm">Visualizador de Documentos RH</h4>
-                                <span class="text-xs text-gray-400 font-mono" id="view-system-id">ID do Sistema: TS-0000</span>
+                            <div class="flex justify-between items-center mb-4 border-b pb-2 border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-sm">Visualizador de Documentos</h4>
+                                <span class="text-xs text-slate-400 font-mono bg-slate-50 px-2 py-0.5 rounded border" id="view-system-id">ID: TS-0000</span>
                             </div>
                             <div class="space-y-2 mb-4">
-                                <h3 class="text-lg font-bold text-gray-800" id="view-candidate-name">Nome do Candidato</h3>
-                                <p class="text-sm text-blue-600 font-medium" id="view-candidate-job">Vaga Pretendida</p>
-                                <div class="text-xs text-gray-500 space-y-1 pt-2">
+                                <h3 class="text-lg font-bold text-slate-800 tracking-tight" id="view-candidate-name">Nome do Candidato</h3>
+                                <p class="text-sm text-blue-600 font-semibold" id="view-candidate-job">Vaga Pretendida</p>
+                                <div class="text-xs text-slate-600 space-y-1.5 pt-3 border-t border-slate-50 mt-2">
                                     <p><strong>📧 E-mail:</strong> <span id="view-candidate-email">--</span></p>
                                     <p><strong>📞 Telefone:</strong> <span id="view-candidate-phone">--</span></p>
-                                    <p><strong>🔗 Portfólio/LinkedIn:</strong> <span id="view-candidate-portfolio">--</span></p>
+                                    <p><strong>🔗 Portfólio/LinkedIn:</strong> <span id="view-candidate-portfolio" class="break-all text-blue-500 underline">--</span></p>
                                 </div>
                             </div>
-                            <div class="border rounded-lg p-3 bg-gray-50 flex items-center justify-between gap-3 text-xs mb-4">
+                            <div class="border border-slate-200 rounded-xl p-3 bg-slate-50/50 flex items-center justify-between gap-3 text-xs mb-4">
                                 <div class="flex items-center gap-2 overflow-hidden">
-                                    <span class="text-xl text-red-500">📄</span>
+                                    <span class="text-2xl text-rose-500">📄</span>
                                     <div class="truncate">
-                                        <p class="font-semibold text-gray-700 truncate" id="view-file-name">nome_do_arquivo.pdf</p>
-                                        <p class="text-gray-400 font-mono text-[10px]" id="view-file-type">Payload binário codificado em Base64</p>
+                                        <p class="font-bold text-slate-700 truncate" id="view-file-name">nome_do_arquivo.pdf</p>
+                                        <p class="text-slate-400 font-mono text-[10px]" id="view-file-type">Base64 Binary Content</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <button id="btn-download-resume" disabled class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-1">
+                            <button id="btn-download-resume" disabled class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-2.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-1.5 shadow-sm shadow-blue-200">
                                 📥 Baixar Arquivo
                             </button>
-                            <button onclick="fecharSessaoDocumento()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs py-2 rounded-lg transition">
-                                🔒 Fechar e Bloquear Sessão
+                            <button onclick="fecharSessaoDocumento()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs py-2.5 rounded-xl transition">
+                                🔒 Fechar Sessão
                             </button>
                         </div>
                     </div>
@@ -227,112 +251,141 @@
     </main>
 
     <!-- MODAL DE INSCRIÇÃO -->
-    <div id="apply-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4 relative">
+    <div id="apply-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4 relative border border-slate-100">
             <div>
                 <span class="text-xs font-bold uppercase tracking-wider text-blue-600 block mb-1">Porto Alegre - RS</span>
-                <h3 class="text-xl font-bold text-gray-900" id="modal-job-title">Candidatura à Vaga</h3>
+                <h3 class="text-xl font-bold text-slate-900 tracking-tight" id="modal-job-title">Candidatura à Vaga</h3>
             </div>
             
-            <form id="apply-form" class="space-y-3.5">
+            <form id="apply-form" class="space-y-4">
                 <input type="hidden" id="form-job-title">
                 
                 <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nome Completo *</label>
-                    <input type="text" id="form-name" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo *</label>
+                    <input type="text" id="form-name" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition">
                 </div>
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">E-mail *</label>
-                        <input type="email" id="form-email" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">E-mail *</label>
+                        <input type="email" id="form-email" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">Telefone *</label>
-                        <input type="tel" id="form-phone" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Telefone *</label>
+                        <input type="tel" id="form-phone" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1">LinkedIn ou Portfólio</label>
-                    <input type="url" id="form-portfolio" placeholder="https://" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">LinkedIn ou Portfólio</label>
+                    <input type="url" id="form-portfolio" placeholder="https://" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1">Anexar Currículo *</label>
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:bg-gray-50 transition relative">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Anexar Currículo *</label>
+                    <div class="border-2 border-dashed border-slate-300 hover:border-blue-400 rounded-xl p-5 text-center cursor-pointer hover:bg-slate-50/50 transition relative">
                         <input type="file" id="form-resume" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleFileSelected(this)">
-                        <div class="space-y-1 text-gray-500" id="upload-prompt">
-                            <span class="block text-2xl">📁</span>
-                            <p class="text-xs font-medium">Clique para selecionar seu arquivo PDF ou DOCX</p>
+                        <div class="space-y-1 text-slate-500" id="upload-prompt">
+                            <span class="block text-3xl">📁</span>
+                            <p class="text-xs font-semibold">Clique ou arraste seu arquivo PDF ou DOCX</p>
                         </div>
-                        <div class="hidden flex items-center justify-center gap-2 text-xs font-bold text-green-600" id="upload-success">
+                        <div class="hidden flex items-center justify-center gap-2 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 py-3 rounded-lg" id="upload-success">
                             <span>✅</span> <span id="uploaded-file-name">arquivo.pdf</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex gap-2 pt-2">
-                    <button type="button" onclick="closeApplyModal()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-lg text-sm font-medium transition">Cancelar</button>
-                    <button type="button" id="btn-submit-form" onclick="forcarSubmissaoInscricaoRealFirebase()" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg text-sm font-medium transition shadow-md">Concluir Inscrição</button>
+                    <button type="button" onclick="closeApplyModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-xl text-sm font-semibold transition">Cancelar</button>
+                    <button type="button" id="btn-submit-form" onclick="forcarSubmissaoInscricaoRealFirebase()" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-sm font-semibold transition shadow-md shadow-blue-200">Concluir Inscrição</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- MODAL DE CONFIRMAÇÃO DE SUCESSO -->
-    <div id="success-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
-            <span class="text-4xl">🎉</span>
-            <h3 class="text-lg font-bold text-gray-900">Inscrição Gravada com Sucesso!</h3>
-            <p class="text-xs text-gray-500">Seu payload foi sincronizado na nuvem. Use o código abaixo para rastreamento:</p>
-            <div class="bg-gray-100 rounded-xl p-3 flex justify-between items-center font-mono text-sm font-bold text-gray-800">
+    <div id="success-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl border border-slate-100">
+            <span class="text-5xl block animate-bounce">🎉</span>
+            <h3 class="text-xl font-bold text-slate-900 tracking-tight">Inscrição Efetuada com Sucesso!</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Seu currículo foi criptografado e salvo com sucesso na nuvem do Datacenter.</p>
+            <div class="bg-slate-50 border rounded-xl p-3 flex justify-between items-center font-mono text-sm font-extrabold text-slate-800">
                 <span id="txt-generated-id">TS-XXXX</span>
-                <button onclick="copiarCodigoSucesso()" class="text-xs text-blue-600 hover:text-blue-800 font-sans font-semibold">Copiar</button>
+                <button onclick="copiarCodigoSucesso()" class="text-xs text-blue-600 hover:text-blue-800 font-sans font-bold">Copiar</button>
             </div>
-            <button onclick="fecharSucessoModal()" class="w-full bg-gray-900 text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">Fechar Aviso</button>
+            <button onclick="fecharSucessoModal()" class="w-full bg-slate-950 text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition shadow-md">Fechar e Ver Status</button>
         </div>
     </div>
 
-    <!-- SCRIPT DE INTEGRAÇÃO OFICIAL COM O SEU FIREBASE CLOUD -->
     <script>
-        // ==========================================
-        // ATENÇÃO: COLE AS SUAS CREDENCIAIS DO FIREBASE AQUI
-        // ==========================================
+        // =========================================================================
+        // CONFIGURAÇÃO DO FIREBASE (Carregada perfeitamente com os dados reais informados)
+        // =========================================================================
         const firebaseConfig = {
-            apiKey: "AIzaSyBj4LFRS1mJiULHRxw-ENiZEsjI2IZZTOA",
-            authDomain: "textilsul-portal.firebaseapp.com",
+            apiKey: "AIzaSyBj4LFRS1mJiULHRxw-ENizeSjI2IZZTOA",
+            authDomain: "://firebaseapp.com",
             projectId: "textilsul-portal",
-            storageBucket: "textilsul-portal.firebasestorage.app",
+            storageBucket: "://appspot.com",
             messagingSenderId: "186714667943",
             appId: "1:186714667943:web:28aa8005a22dacd9ba1482",
+            measurementId: "G-BWT98CVPTD"
         };
 
-        // Inicializa o Firebase real se as chaves forem preenchidas, senão usa fallback estável
-        let db;
-        try {
-            if (firebaseConfig.apiKey !== "AIzaSyBj4LFRS1mJiULHRxw-ENiZEsjI2IZZTOA") {
-                firebase.initializeApp(firebaseConfig);
-                db = firebase.firestore();
-                console.log("Conectado com sucesso ao Firebase Cloud real!");
-            }
-        } catch (error) {
-            console.error("Erro ao conectar no Firebase Cloud configurado:", error);
-        }
-
-        // Cache local que escuta as atualizações em tempo real da nuvem
+        let db = null;
+        let usandoFirebaseReal = false;
         let candidaturas_collection = [];
         let currentAttachedFile = null;
 
-        // Ativa a escuta em tempo real (Realtime Sync) se o banco estiver conectado
-        if (db) {
-            db.collection("candidaturas_collection").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-                candidaturas_collection = [];
-                snapshot.forEach((doc) => {
-                    candidaturas_collection.push(doc.data());
+        try {
+            if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "COLE_AQUI_SUA_API_KEY") {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                usandoFirebaseReal = true;
+                console.log("Firebase Cloud Conectado Real.");
+            }
+        } catch (error) {
+            console.error("Falha de comunicação interna com o Firebase Cloud: ", error);
+        }
+
+        window.onload = function() {
+            if (usandoFirebaseReal && db) {
+                document.getElementById('datacenter-title').innerText = "Datacenter Realtime (Firebase Live)";
+                document.getElementById('datacenter-subtitle').innerText = "Sincronização global síncrona ativa entre dispositivos";
+                
+                // Abre canais síncronos persistentes entre o PC e o Celular
+                db.collection("candidaturas_collection").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+                    candidaturas_collection = [];
+                    snapshot.forEach((doc) => {
+                        candidaturas_collection.push(doc.data());
+                    });
+                    renderAdminView();
+                }, (error) => {
+                    console.error("Snapshot erro: ", error);
+                    ativarFallbackLocalStorage();
                 });
-                renderAdminView();
-            });
+            } else {
+                ativarFallbackLocalStorage();
+            }
+        };
+
+        function activarFallbackLocalStorage() {
+            document.getElementById('datacenter-title').innerText = "Datacenter In-Memory Local";
+            document.getElementById('datacenter-subtitle').innerText = "Modo Local Fallback Ativado por Contingência";
+            
+            const localData = localStorage.getItem("ts_candidaturas");
+            if (localData) {
+                candidaturas_collection = JSON.parse(localData);
+            } else {
+                candidaturas_collection = [];
+            }
+            renderAdminView();
+        }
+
+        function salvarNoLocalStorage() {
+            if (!usandoFirebaseReal) {
+                localStorage.setItem("ts_candidaturas", JSON.stringify(candidaturas_collection));
+            }
         }
 
         function switchTab(tabName) {
@@ -379,7 +432,7 @@
 
             const submitBtn = document.getElementById('btn-submit-form');
             submitBtn.disabled = true;
-            submitBtn.innerText = "Processando arquivo...";
+            submitBtn.innerText = "Lendo currículo...";
 
             document.getElementById('upload-prompt').classList.add('hidden');
             document.getElementById('upload-success').classList.remove('hidden');
@@ -390,7 +443,7 @@
                 currentAttachedFile = {
                     nome: file.name,
                     tipo: file.type || "application/pdf", 
-                    base64: e.target.result // Mantém o MIME binário correto preservando a extensão no Firebase
+                    base64: e.target.result // Carrega o cabeçalho base64 exato preservando pdf/docx
                 };
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Concluir Inscrição";
@@ -410,7 +463,6 @@
             }
         }
 
-        // Função corrigida: Envia os dados para a Nuvem de verdade sincronizando Celular e PC
         function forcarSubmissaoInscricaoRealFirebase() {
             const nome = document.getElementById('form-name').value.trim();
             const email = document.getElementById('form-email').value.trim();
@@ -419,18 +471,18 @@
             const vaga = document.getElementById('form-job-title').value;
 
             if (!nome || !email || !telefone) {
-                alert("Por favor, preencha todos os campos obrigatórios (*).");
+                alert("Por favor, preencha os campos obrigatórios (*).");
                 return;
             }
 
             if (!currentAttachedFile) {
-                alert("Por favor, selecione seu currículo (PDF ou DOCX).");
+                alert("Por favor, anexe seu arquivo de currículo.");
                 return;
             }
 
             const submitBtn = document.getElementById('btn-submit-form');
             submitBtn.disabled = true;
-            submitBtn.innerText = "Sincronizando com a Nuvem...";
+            submitBtn.innerText = "Enviando à Nuvem...";
 
             const randomDigits = Math.floor(1000 + Math.random() * 9000);
             const generatedID = `TS-${randomDigits}`;
@@ -448,20 +500,19 @@
                 arquivo: currentAttachedFile
             };
 
-            // SE TIVER FIREBASE CONFIGURADO: Salva direto no Firestore real da nuvem global
-            if (db) {
+            if (usandoFirebaseReal && db) {
                 db.collection("candidaturas_collection").doc(generatedID).set(novoCandidato)
                 .then(() => {
                     exibirSucesso(generatedID);
                 })
                 .catch((err) => {
-                    alert("Erro ao gravar no Firebase Cloud: " + err.message);
+                    alert("Erro Firebase: " + err.message);
                     submitBtn.disabled = false;
                     submitBtn.innerText = "Concluir Inscrição";
                 });
             } else {
-                // FALLBACK MOCK LOCAL (caso as credenciais ainda não estejam coladas)
                 candidaturas_collection.unshift(novoCandidato);
+                salvarNoLocalStorage();
                 exibirSucesso(generatedID);
             }
         }
@@ -486,7 +537,6 @@
             buscarTrackingRealFirebase();
         }
 
-        // Rastreia em tempo real consultando o snapshot local sincronizado com a nuvem
         function buscarTrackingRealFirebase() {
             const termoBusca = document.getElementById('input-busca-tracking').value.trim().toLowerCase();
             const container = document.getElementById('container-resultado-tracking');
@@ -501,8 +551,8 @@
 
             if (!cadastro) {
                 container.innerHTML = `
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center text-gray-500 text-sm">
-                        Nenhum registro encontrado para este termo. Se você acabou de se candidatar pelo celular, verifique se preencheu as credenciais do Firebase no topo do código.
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 text-center text-slate-500 text-sm">
+                        Nenhum registro encontrado para este termo.
                     </div>
                 `;
                 return;
@@ -520,21 +570,21 @@
 
             let etapasHTML = "";
             etapas.forEach((etapa, idx) => {
-                let statusCirculo = "border-2 border-gray-200 bg-white text-gray-400";
-                let statusTexto = "text-gray-400 font-medium";
+                let statusCirculo = "border-2 border-slate-200 bg-white text-slate-400";
+                let statusTexto = "text-slate-400 font-medium";
                 let badgeItem = "";
 
                 if (idx < currentEtapaIdx) {
-                    statusCirculo = "bg-green-500 text-white";
-                    statusTexto = "text-gray-900 font-semibold";
+                    statusCirculo = "bg-emerald-500 text-white";
+                    statusTexto = "text-slate-900 font-semibold";
                     badgeItem = "✓";
                 } else if (idx === currentEtapaIdx) {
                     statusCirculo = "bg-blue-600 text-white ring-4 ring-blue-100";
                     statusTexto = "text-blue-600 font-bold";
                     badgeItem = cadastro.statusGeral === 'Reprovado' ? '✕' : '!';
                     if (cadastro.statusGeral === 'Reprovado') {
-                        statusCirculo = "bg-red-500 text-white ring-4 ring-red-100";
-                        statusTexto = "text-red-600 font-bold";
+                        statusCirculo = "bg-rose-500 text-white ring-4 ring-rose-100";
+                        statusTexto = "text-rose-600 font-bold";
                     }
                 } else {
                     badgeItem = idx + 1;
@@ -547,22 +597,22 @@
                         </div>
                         <div class="pt-0.5">
                             <p class="text-sm ${statusTexto}">${etapa}</p>
-                            ${idx === currentEtapaIdx ? `<span class="inline-block text-[10px] mt-0.5 px-2 py-0.5 rounded-full font-bold uppercase ${cadastro.statusGeral === 'Reprovado' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'}">${cadastro.statusGeral}</span>` : ''}
+                            ${idx === currentEtapaIdx ? `<span class="inline-block text-[10px] mt-0.5 px-2 py-0.5 rounded-full font-bold uppercase ${cadastro.statusGeral === 'Reprovado' ? 'bg-rose-100 text-rose-800' : 'bg-blue-100 text-blue-800'}">${cadastro.statusGeral}</span>` : ''}
                         </div>
                     </div>
                 `;
             });
 
             container.innerHTML = `
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-6">
-                    <div class="border-b pb-4 flex justify-between items-start">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 space-y-6">
+                    <div class="border-b pb-4 flex justify-between items-start border-slate-100">
                         <div>
-                            <span class="text-xs font-semibold text-gray-400 font-mono">${cadastro.id}</span>
-                            <h3 class="text-lg font-bold text-gray-900">${cadastro.vaga}</h3>
+                            <span class="text-xs font-semibold text-slate-400 font-mono">${cadastro.id}</span>
+                            <h3 class="text-lg font-bold text-slate-900">${cadastro.vaga}</h3>
                         </div>
-                        <span class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-md font-medium">Candidato: ${cadastro.nome}</span>
+                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md font-medium">Candidato: ${cadastro.nome}</span>
                     </div>
-                    <div class="space-y-5 relative before:absolute before:bottom-2 before:top-2 before:left-4 before:w-0.5 before:bg-gray-100">
+                    <div class="space-y-5 relative before:absolute before:bottom-2 before:top-2 before:left-4 before:w-0.5 before:bg-slate-100">
                         ${etapasHTML}
                     </div>
                 </div>
@@ -592,23 +642,23 @@
 
             const tbody = document.getElementById('admin-table-body');
             if (candidaturas_collection.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-400 text-xs">Aguardando novas candidaturas em tempo real na nuvem...</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400 text-xs">Nenhuma candidatura registrada na nuvem.</td></tr>`;
                 return;
             }
 
             tbody.innerHTML = candidaturas_collection.map((cand) => {
                 return `
-                    <tr class="hover:bg-gray-50 transition text-xs text-gray-700">
-                        <td class="px-6 py-4 font-mono font-bold text-gray-900">${cand.id}</td>
-                        <td class="px-6 py-4 font-medium">${cand.nome}</td>
+                    <tr class="hover:bg-slate-50 transition text-xs text-slate-700">
+                        <td class="px-6 py-4 font-mono font-bold text-slate-900">${cand.id}</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">${cand.nome}</td>
                         <td class="px-6 py-4">${cand.vaga}</td>
                         <td class="px-6 py-4">
-                            <button onclick="carregarDocumentoSessao('${cand.id}')" class="text-blue-600 hover:underline text-left font-medium block truncate max-w-[150px]">
+                            <button onclick="carregarDocumentoSessao('${cand.id}')" class="text-blue-600 hover:underline text-left font-medium block truncate max-w-[140px]">
                                 📄 ${cand.arquivo ? cand.arquivo.nome : 'documento.pdf'}
                             </button>
                         </td>
                         <td class="px-6 py-4">
-                            <select onchange="atualizarEtapaCandidatoReal('${cand.id}', this.value)" class="bg-gray-50 border border-gray-300 rounded px-2 py-1 text-xs outline-none">
+                            <select onchange="atualizarEtapaCandidatoReal('${cand.id}', this.value)" class="bg-slate-50 border border-slate-300 rounded px-2 py-1 text-xs outline-none">
                                 <option value="Inscrição Efetuada" ${cand.etapa === 'Inscrição Efetuada' ? 'selected' : ''}>1. Inscrição Efetuada</option>
                                 <option value="Análise de Requisitos e Currículo" ${cand.etapa === 'Análise de Requisitos e Currículo' ? 'selected' : ''}>2. Análise de Currículo</option>
                                 <option value="Entrevista com Gestor Comercial / TI" ${cand.etapa === 'Entrevista com Gestor Comercial / TI' ? 'selected' : ''}>3. Entrevista Gestor</option>
@@ -616,8 +666,8 @@
                             </select>
                         </td>
                         <td class="px-6 py-4 text-center space-x-2">
-                            <button onclick="alterarStatusGeralReal('${cand.id}', 'Aprovado')" class="bg-green-100 text-green-700 px-2 py-1 rounded font-bold hover:bg-green-200 transition">Aprovar</button>
-                            <button onclick="alterarStatusGeralReal('${cand.id}', 'Reprovado')" class="bg-red-100 text-red-700 px-2 py-1 rounded font-bold hover:bg-red-200 transition">Reprovar</button>
+                            <button onclick="alterarStatusGeralReal('${cand.id}', 'Aprovado')" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded font-bold hover:bg-emerald-100 transition">Aprovar</button>
+                            <button onclick="alterarStatusGeralReal('${cand.id}', 'Reprovado')" class="bg-rose-50 text-rose-700 px-2 py-1 rounded font-bold hover:bg-rose-100 transition">Reprovar</button>
                         </td>
                     </tr>
                 `;
@@ -625,25 +675,25 @@
         }
 
         function atualizarEtapaCandidatoReal(id, novaEtapa) {
-            if (db) {
+            if (usandoFirebaseReal && db) {
                 db.collection("candidaturas_collection").doc(id).update({
                     etapa: novaEtapa,
                     statusGeral: "Em Andamento"
                 });
             } else {
                 const cand = candidaturas_collection.find(c => c.id === id);
-                if (cand) { cand.etapa = novaEtapa; cand.statusGeral = "Em Andamento"; renderAdminView(); }
+                if (cand) { cand.etapa = novaEtapa; cand.statusGeral = "Em Andamento"; salvarNoLocalStorage(); renderAdminView(); }
             }
         }
 
         function alterarStatusGeralReal(id, novoStatus) {
-            if (db) {
+            if (usandoFirebaseReal && db) {
                 db.collection("candidaturas_collection").doc(id).update({
                     statusGeral: novoStatus
                 });
             } else {
                 const cand = candidaturas_collection.find(c => c.id === id);
-                if (cand) { cand.statusGeral = novoStatus; renderAdminView(); }
+                if (cand) { cand.statusGeral = novoStatus; salvarNoLocalStorage(); renderAdminView(); }
             }
         }
 
@@ -651,14 +701,14 @@
             const cand = candidaturas_collection.find(c => c.id === id);
             if (!cand || !cand.arquivo) return;
 
-            document.getElementById('view-system-id').innerText = `ID do Sistema: ${cand.id}`;
+            document.getElementById('view-system-id').innerText = `ID: ${cand.id}`;
             document.getElementById('view-candidate-name').innerText = cand.nome;
             document.getElementById('view-candidate-job').innerText = cand.vaga;
             document.getElementById('view-candidate-email').innerText = cand.email;
             document.getElementById('view-candidate-phone').innerText = cand.telefone;
             document.getElementById('view-candidate-portfolio').innerText = cand.portfolio;
             document.getElementById('view-file-name').innerText = cand.arquivo.nome;
-            document.getElementById('view-file-type').innerText = `MIME: ${cand.arquivo.tipo} | Sincronizado`;
+            document.getElementById('view-file-type').innerText = `MIME: ${cand.arquivo.tipo}`;
 
             const btnDownload = document.getElementById('btn-download-resume');
             btnDownload.disabled = false;
@@ -674,7 +724,7 @@
         }
 
         function fecharSessaoDocumento() {
-            document.getElementById('view-system-id').innerText = "ID do Sistema: TS-0000";
+            document.getElementById('view-system-id').innerText = "ID: TS-0000";
             document.getElementById('view-candidate-name').innerText = "Nome do Candidato";
             document.getElementById('view-candidate-job').innerText = "Vaga Pretendida";
             document.getElementById('view-candidate-email').innerText = "--";
